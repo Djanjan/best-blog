@@ -40,9 +40,11 @@
       "plugin:vue/essential",
       "@vue/standard"
     ],
-    "rules": {},
     "parserOptions": {
       "parser": "babel-eslint"
+    },
+    "rules": {
+      "vue/no-unused-vars": "warning"
     }
   },
   "browserslist": [
