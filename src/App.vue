@@ -1,29 +1,44 @@
 <template>
-  <div id="app">
-    <navPanel />
+  <v-app
+    id="inspire"
+  >
+    <navigationPanel />
+
+    <appBar />
+
     <router-view />
-  </div>
+  </v-app>
 </template>
 
 <script>
-import navPanel from './components/NavPanel.vue'
+import navigationPanel from './components/NavigationPanel.vue'
+import appBar from './components/AppBar.vue'
 
 export default {
-  name: 'Blog',
-  components: { navPanel }
+  props: {
+    source: String
+  },
+  components: {
+    navigationPanel,
+    appBar
+  },
+  computed: {
+
+  },
+  data: () => ({
+
+  }),
+  created: function () {
+    // this.$router.push({ path: '/home' })
+  },
+  methods: {
+
+  }
 }
 </script>
 
 <style lang="scss">
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-#app{
-    position: absolute;
-    height: 100%;
-    width: 100%;
-  }
+.row{
+  padding: 0px 15px 0px 0px;
+}
 </style>

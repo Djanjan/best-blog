@@ -1,4 +1,4 @@
-# blog
+# best-blog
 
 ## Project setup
 ```
@@ -18,11 +18,6 @@ npm run build
 ### Lints and fixes files
 ```
 npm run lint
-```
-
-### Project configuration
-```
-vue ui
 ```
 
 ### Customize configuration
