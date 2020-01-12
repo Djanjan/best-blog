@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-    :value="drawer"
+    v-model="updateDrawer"
     src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
     dark
     app
@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   data: () => ({
@@ -93,10 +93,18 @@ export default {
           this.$router.push(this.links[item].share)
         }
       }
+    },
+    updateDrawer: {
+      get () {
+        return this.drawer
+      },
+      set (value) {
+        this.setDrawer(value)
+      }
     }
   },
   created: function () {
-
+    // console.log(this.$store.state.appBar.drawer)
   },
   mounted: function () {
     // eslint-disable-next-line no-return-assign
@@ -106,7 +114,10 @@ export default {
   methods: {
     randomNumber: function () {
       return Math.floor(Math.random() * (100 - 1 + 1)) + 1
-    }
+    },
+    ...mapActions('appBar', [
+      'setDrawer'
+    ])
   }
 }
 </script>

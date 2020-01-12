@@ -4,14 +4,19 @@ export default {
     drawer: true
   },
   mutations: {
-    Set_Drawer (state) {
-      // console.log(state.drawer = !state.drawer)
+    Toggle_Drawer (state) {
       state.drawer = !state.drawer
+    },
+    Set_Drawer (state, value) {
+      state.drawer = value
     }
   },
   actions: {
-    setDrawer ({ commit }, drawer) {
-      commit('Set_Drawer', drawer)
+    setDrawer ({ commit }, value) {
+      commit('Set_Drawer', value)
+    },
+    toggleDrawer ({ commit }) {
+      commit('Toggle_Drawer')
     }
   }
 }

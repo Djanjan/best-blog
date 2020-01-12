@@ -5,7 +5,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '*',
     name: 'not-found',
     component: () => import('../views/NotFound.vue')
   },
