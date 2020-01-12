@@ -8,7 +8,7 @@
   >
     <v-app-bar-nav-icon
       class="v-btn--contained v-btn--fab v-btn--round v-size--small"
-      @click.stop="setDrawer"
+      @click.stop="toggleDrawer"
     />
     <v-toolbar-title>Blog</v-toolbar-title>
 
@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     ...mapActions('appBar', [
-      'setDrawer'
+      'toggleDrawer'
     ])
   }
 }
