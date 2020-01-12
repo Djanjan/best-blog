@@ -1,19 +1,19 @@
 <template>
 <v-container fluid>
     <v-row
-      dense
       align="stretch"
       justify="space-between"
     >
       <v-col
         v-for="n in 50"
         :key="n"
+        class="ml-2"
       >
         <v-skeleton-loader
           :loading="loading"
           transition="scale-transition"
-          min-height="200px"
-          min-width="300px"
+          min-height="100px"
+          min-width="200px"
           type="card"
         >
         <v-card>
@@ -22,8 +22,8 @@
             :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
             class="white--text align-end"
             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-            min-height="200px"
-            min-width="300px"
+          min-height="100px"
+          min-width="200px"
             aspect-ratio="1"
           >
             <v-card-title v-text="`Title ${n}`" />
