@@ -1,5 +1,5 @@
 <template>
-<v-content>
+<div>
   <v-skeleton-loader
     :loading="loading"
     transition="scale-transition"
@@ -26,7 +26,7 @@
           </v-img>
   </v-skeleton-loader>
           <hfooter />
-</v-content>
+</div>
 </template>
 
 <script>

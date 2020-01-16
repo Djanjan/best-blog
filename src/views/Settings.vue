@@ -1,6 +1,5 @@
 <template>
-<v-content>
-
+<div>
 <v-card-text class="pa-6">
 
   <v-skeleton-loader
@@ -212,8 +211,7 @@
 
   </v-card>
 </v-card-text>
-
-</v-content>
+</div>
 </template>
 
 <script>

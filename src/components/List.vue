@@ -5,9 +5,8 @@
       justify="space-between"
     >
       <v-col
-        v-for="n in 50"
+        v-for="n in 30"
         :key="n"
-        class="ml-2"
       >
         <v-skeleton-loader
           :loading="loading"
@@ -16,15 +15,23 @@
           min-width="200px"
           type="card"
         >
-        <v-card>
+
+        <v-hover
+        v-slot:default="{ hover }"
+        close-delay="100"
+        >
+
+        <v-card
+          :elevation="hover ? 16 : 2">
           <v-img
-            :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
-            :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
+            :src="`https://picsum.photos/500/300?image=${n * 10 + 10}`"
+            :lazy-src="`https://picsum.photos/10/6?image=${n * 10 + 10}`"
             class="white--text align-end"
             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-          min-height="100px"
-          min-width="200px"
+            min-height="100px"
+            min-width="200px"
             aspect-ratio="1"
+            @click.stop="openArticle(n)"
           >
             <v-card-title v-text="`Title ${n}`" />
             <template v-slot:placeholder>
@@ -33,7 +40,7 @@
                 align="center"
                 justify="center"
               >
-                <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                <v-progress-circular indeterminate color="primary"></v-progress-circular>
               </v-row>
             </template>
           </v-img>
@@ -53,20 +60,28 @@
               <v-icon>mdi-share-variant</v-icon>
             </v-btn>
           </v-card-actions>
+
         </v-card>
+
+        </v-hover>
+
         </v-skeleton-loader>
+
       </v-col>
     </v-row>
   </v-container>
 </template>
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   props: {
     mass: Array
   },
   data: () => ({
     loading: true,
-    isActive: false
+    isActive: false,
+    dialog: false
   }),
   mounted: function () {
     // eslint-disable-next-line no-return-assign
@@ -76,7 +91,20 @@ export default {
   methods: {
     randomNumber: function () {
       return Math.floor(Math.random() * (100 - 1 + 1)) + 1
-    }
+    },
+    openArticle: function (id) {
+      this.updateContentBar({
+        img: 'https://picsum.photos/1920/1080?image=' + (id * 10 + 10),
+        title: 'Article ' + id
+      })
+      this.toggleContentBar()
+      this.$router.push({ name: 'article', params: { id: id } })
+    },
+    ...mapActions('appBar', [
+      'toggleDrawer',
+      'toggleContentBar',
+      'updateContentBar'
+    ])
   }
 }
 </script>

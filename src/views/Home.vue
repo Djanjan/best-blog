@@ -1,8 +1,8 @@
 <template>
-  <v-content>
+  <div id="page_content">
     <list :mass="cards" />
     <hfooter />
-  </v-content>
+  </div>
 </template>
 
 <script>
