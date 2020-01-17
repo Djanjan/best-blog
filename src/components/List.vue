@@ -32,9 +32,20 @@
             min-height="100px"
             min-width="200px"
             aspect-ratio="1"
-            @click.stop="openArticle(n)"
           >
             <v-card-title v-text="`Title ${n}`" />
+
+            <v-fade-transition>
+              <v-overlay
+                v-if="hover"
+                absolute
+                color="primary"
+              >
+                <v-btn
+                  @click.stop="openArticle(n)">See article</v-btn>
+              </v-overlay>
+            </v-fade-transition>
+
             <template v-slot:placeholder>
               <v-row
                 class="fill-height ma-0"
