@@ -10,6 +10,8 @@
       transition="scale-transition"
       type="list-item-avatar-two-line"
     >
+    <div>
+    <template v-if="logged">
     <v-list dense>
       <v-list-group
         value="false"
@@ -17,28 +19,46 @@
       >
         <template v-slot:activator>
           <v-list-item-avatar>
-              <v-img src="https://randomuser.me/api/portraits/women/50.jpg"></v-img>
-            </v-list-item-avatar>
-            <v-list-item-content>
-              <v-list-item-title>Sandra Adams</v-list-item-title>
-              <v-list-item-subtitle>sandra_a88@gmail.com</v-list-item-subtitle>
-            </v-list-item-content>
+            <v-img :src="userDate.avatar"></v-img>
+          </v-list-item-avatar>
+          <v-list-item-content>
+            <v-list-item-title>{{userDate.login}}</v-list-item-title>
+            <v-list-item-subtitle>{{userDate.email}}</v-list-item-subtitle>
+          </v-list-item-content>
         </template>
 
-        <v-list-item link>
+        <v-list-item link @click.stop="logout()">
           <v-list-item-action>
             <v-icon>mdi-exit-to-app</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Logaut</v-list-item-title>
+            <v-list-item-title>Logout</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
       </v-list-group>
     </v-list>
+    </template>
+
+    <template v-else>
+      <v-list>
+        <v-list-item
+          link
+          @click.stop="toggleDialog()">
+          <v-list-item-action>
+            <v-icon>mdi-exit-to-app</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Login</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+      <loginDialog/>
+    </template>
+    </div>
     </v-skeleton-loader>
 
-      <v-divider></v-divider>
+    <v-divider></v-divider>
 
     <v-skeleton-loader
       :loading="loading"
@@ -70,10 +90,15 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import loginDialog from '../views/Login.vue'
 
 export default {
+  components: {
+    loginDialog
+  },
   data: () => ({
     loading: true,
+    openLoginPage: false,
     links: [
       { text: 'Home', icon: 'mdi-home', share: '/home' },
       { text: 'Contact', icon: 'mdi-contact-mail', share: '/' },
@@ -83,6 +108,13 @@ export default {
   computed: {
     ...mapState('appBar', {
       drawer: state => state.drawer
+    }),
+    ...mapState('user', {
+      logged: state => state.logged,
+      userDate: state => state.date
+    }),
+    ...mapState({
+      openDialog: state => state.openDialog
     }),
     selectedItems: {
       get () {
@@ -112,11 +144,18 @@ export default {
     // this.loading = false
   },
   methods: {
-    randomNumber: function () {
-      return Math.floor(Math.random() * (100 - 1 + 1)) + 1
+    randomNumber: function (value) {
+      return Math.floor(Math.random() * (value - 1 + 1)) + 1
     },
     ...mapActions('appBar', [
       'setDrawer'
+    ]),
+    ...mapActions('user', [
+      'toggleLogged',
+      'logout'
+    ]),
+    ...mapActions([
+      'toggleDialog'
     ])
   }
 }
