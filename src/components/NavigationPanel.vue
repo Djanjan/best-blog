@@ -44,7 +44,7 @@
       <v-list>
         <v-list-item
           link
-          @click.stop="toggleDialog()">
+          @click.stop="toggleDialogLogin()">
           <v-list-item-action>
             <v-icon>mdi-exit-to-app</v-icon>
           </v-list-item-action>
@@ -53,7 +53,10 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+
       <loginDialog/>
+      <register-dialog />
+
     </template>
     </div>
     </v-skeleton-loader>
@@ -90,11 +93,14 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
+
 import loginDialog from '../views/Login.vue'
+import registerDialog from '../views/Register.vue'
 
 export default {
   components: {
-    loginDialog
+    loginDialog,
+    'register-dialog': registerDialog
   },
   data: () => ({
     loading: true,
@@ -112,9 +118,6 @@ export default {
     ...mapState('user', {
       logged: state => state.logged,
       userDate: state => state.date
-    }),
-    ...mapState({
-      openDialog: state => state.openDialog
     }),
     selectedItems: {
       get () {
@@ -155,7 +158,7 @@ export default {
       'logout'
     ]),
     ...mapActions([
-      'toggleDialog'
+      'toggleDialogLogin'
     ])
   }
 }

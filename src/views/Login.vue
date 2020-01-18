@@ -7,7 +7,7 @@
     class="overflow-hidden"
   >
     <v-toolbar flat color="transparent" absolute dark height="80px">
-      <v-btn icon @click="toggleDialog()" class="ml-1">
+      <v-btn icon @click="toggleDialogLogin()" class="ml-1">
         <v-icon>mdi-close</v-icon>
       </v-btn>
 
@@ -17,7 +17,7 @@
 
       <v-toolbar-items class="mr-7 hidden-sm-and-down">
         <v-btn dark text><v-icon left>mdi-home</v-icon>Home</v-btn>
-        <v-btn dark text><v-icon left>mdi-account-multiple-plus</v-icon>Register</v-btn>
+        <v-btn dark text @click="toggleDialogRegister()"><v-icon left>mdi-account-multiple-plus</v-icon>Register</v-btn>
         <v-btn dark text><v-icon left>mdi-information-outline</v-icon>About</v-btn>
       </v-toolbar-items>
     </v-toolbar>
@@ -99,15 +99,6 @@
                   @change="$v.password.$touch()"
                   @blur="$v.password.$touch()"
                 ></v-text-field>
-                <v-checkbox
-                  v-model="checkbox"
-                  :error-messages="checkboxErrors"
-                  label="Do you agree?"
-                  color="primary"
-                  required
-                  @change="$v.checkbox.$touch()"
-                  @blur="$v.checkbox.$touch()"
-                ></v-checkbox>
               </form>
 
               <v-btn color="primary" text rounded large @click="submit">
@@ -130,16 +121,12 @@ import { required, maxLength, email } from 'vuelidate/lib/validators'
 // import hfooter from '../components/Footer.vue'
 
 export default {
+  name: 'loginDialog',
   mixins: [validationMixin],
   validations: {
     name: { required, maxLength: maxLength(25) },
     email: { required, email },
     password: { required },
-    checkbox: {
-      checked (val) {
-        return val
-      }
-    },
     submitStatus: ''
   },
   components: {
@@ -149,19 +136,12 @@ export default {
     loading: true,
     name: '',
     email: '',
-    password: '',
-    checkbox: false
+    password: ''
   }),
   computed: {
     ...mapState({
-      openDialog: state => state.dialog
+      openDialog: state => state.dialogLogin
     }),
-    checkboxErrors () {
-      const errors = []
-      if (!this.$v.checkbox.$dirty) return errors
-      !this.$v.checkbox.checked && errors.push('You must agree to continue!')
-      return errors
-    },
     passwordErrors () {
       const errors = []
       if (!this.$v.password.$dirty) return errors
@@ -190,7 +170,10 @@ export default {
     // this.loading = false
   },
   methods: {
-    ...mapActions(['toggleDialog']),
+    ...mapActions([
+      'toggleDialogLogin',
+      'toggleDialogRegister'
+    ]),
     ...mapActions('user', ['authorization']),
     randomNumber: function (value) {
       return Math.floor(Math.random() * (value - 1 + 1)) + 1
@@ -217,7 +200,6 @@ export default {
       this.name = ''
       this.email = ''
       this.password = ''
-      this.checkbox = false
     }
   }
 }

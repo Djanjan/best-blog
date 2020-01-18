@@ -13,16 +13,30 @@ export default new Vuex.Store({
     user
   },
   state: {
-    dialog: false
+    dialog: false,
+    dialogLogin: false,
+    dialogRegister: false
   },
   mutations: {
     Toggle_Dialog (state) {
       state.dialog = !state.dialog
+    },
+    Toggle_Dialog_Login (state) {
+      state.dialogLogin = !state.dialogLogin
+    },
+    Toggle_Dialog_Register (state) {
+      state.dialogRegister = !state.dialogRegister
     }
   },
   actions: {
     toggleDialog ({ commit }) {
       commit('Toggle_Dialog')
+    },
+    toggleDialogLogin ({ commit }) {
+      commit('Toggle_Dialog_Login')
+    },
+    toggleDialogRegister ({ commit }) {
+      commit('Toggle_Dialog_Register')
     }
   }
 })
