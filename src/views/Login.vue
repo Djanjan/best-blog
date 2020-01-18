@@ -22,7 +22,7 @@
       </v-toolbar-items>
     </v-toolbar>
 
-    <section style="height: 100vh;">
+    <section style="height: 120vh;">
       <v-img
         src="https://picsum.photos/1900/1200?random"
         lazy-src="https://picsum.photos/10/6?random"
@@ -231,6 +231,6 @@ export default {
 }
 
 .v-img-full {
-  height: 110vh;
+  height: 120vh;
 }
 </style>
