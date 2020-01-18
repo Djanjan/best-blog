@@ -2,7 +2,10 @@
   <v-footer
     padless
     flat
-    class="transparent"
+    :light="light"
+    :dark="dark"
+    width="100%"
+    class="transparent hidden-sm-and-down"
   >
     <v-card-text
       flat
@@ -44,6 +47,16 @@
 
 <script>
 export default {
+  props: {
+    light: {
+      type: Boolean,
+      default: true
+    },
+    dark: {
+      type: Boolean,
+      default: false
+    }
+  },
   data: () => ({
     loading: true,
     links: [

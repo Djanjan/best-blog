@@ -16,9 +16,9 @@
       <v-spacer></v-spacer>
 
       <v-toolbar-items class="mr-7 hidden-sm-and-down">
-        <v-btn dark text>Home</v-btn>
-        <v-btn dark text>Register</v-btn>
-        <v-btn dark text>About</v-btn>
+        <v-btn dark text><v-icon left>mdi-home</v-icon>Home</v-btn>
+        <v-btn dark text><v-icon left>mdi-account-multiple-plus</v-icon>Register</v-btn>
+        <v-btn dark text><v-icon left>mdi-information-outline</v-icon>About</v-btn>
       </v-toolbar-items>
     </v-toolbar>
 
@@ -38,11 +38,10 @@
           </v-row>
         </template>
         <v-layout
-          white--text
           align-center
           column
           justify-center
-          style="margin-top: 8em;"
+          style="margin-top: 4em; height:100%"
         >
           <v-card class="px-5 pb-3" max-width="100%" width="400">
             <v-sheet
@@ -116,7 +115,7 @@
               </v-btn>
             </v-card-text>
           </v-card>
-          <hfooter />
+
         </v-layout>
       </v-img>
     </section>
@@ -128,7 +127,7 @@ import { mapState, mapActions } from 'vuex'
 import { validationMixin } from 'vuelidate'
 import { required, maxLength, email } from 'vuelidate/lib/validators'
 
-import hfooter from '../components/Footer.vue'
+// import hfooter from '../components/Footer.vue'
 
 export default {
   mixins: [validationMixin],
@@ -144,7 +143,7 @@ export default {
     submitStatus: ''
   },
   components: {
-    hfooter
+    // hfooter
   },
   data: () => ({
     loading: true,
