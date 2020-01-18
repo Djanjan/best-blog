@@ -6,6 +6,7 @@
     transition="dialog-bottom-transition"
     class="overflow-hidden"
   >
+    <template v-if="!$vuetify.breakpoint.xs">
     <v-toolbar flat color="transparent" absolute dark height="80px">
       <v-btn icon @click="toggleDialogRegister()" class="ml-1">
         <v-icon>mdi-close</v-icon>
@@ -15,7 +16,7 @@
 
       <v-spacer></v-spacer>
 
-      <v-toolbar-items class="mr-7 hidden-sm-and-down">
+      <v-toolbar-items class="mr-7 hidden-xs-and-down">
         <v-btn dark text><v-icon left>mdi-home</v-icon>Home</v-btn>
         <v-btn dark text @click.stop="toggleDialogRegister()"
           ><v-icon left>mdi-exit-to-app</v-icon>Login</v-btn
@@ -173,6 +174,100 @@
         </v-layout>
       </v-img>
     </section>
+    </template>
+
+    <template v-else>
+      <v-toolbar height="80px">
+        <v-btn icon @click="toggleDialogRegister()" class="ml-1">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+
+        <v-toolbar-title class="ml-1">Register Page</v-toolbar-title>
+
+        <v-spacer></v-spacer>
+
+      <v-toolbar-items class="mr-1">
+        <v-btn icon text @click.stop="toggleDialogRegister()"
+          ><v-icon left>mdi-exit-to-app</v-icon></v-btn
+        >
+      </v-toolbar-items>
+    </v-toolbar>
+
+    <v-card class="px-5 pb-3" min-width="100%">
+            <v-sheet
+              class="mx-auto pa-8 text-center"
+              color="primary"
+              elevation="12"
+              dark
+              max-width="calc(100% - 32px)"
+            >
+              <h1 class="display-2 font-weight-bold mb-2">
+                Register
+              </h1>
+            </v-sheet>
+            <v-row>
+              <v-col class="col-md-6 col-12">
+                <v-card-text class="text-center mx-auto">
+                  <v-btn dark fab class="ma-1" color="deep-purple">
+                    <v-icon>mdi-facebook</v-icon>
+                  </v-btn>
+                  <v-btn dark fab class="ma-1" color="blue">
+                    <v-icon>mdi-twitter</v-icon>
+                  </v-btn>
+                  <v-btn dark fab class="ma-1">
+                    <v-icon>mdi-github-box</v-icon>
+                  </v-btn>
+                  <div class="text-center grey--text body-1 font-weight-light">
+                    Or Login
+                  </div>
+                  <form>
+                    <v-text-field
+                      v-model="name"
+                      :error-messages="nameErrors"
+                      :counter="25"
+                      label="Name"
+                      prepend-icon="mdi-face"
+                      required
+                      @input="$v.name.$touch()"
+                      @blur="$v.name.$touch()"
+                    ></v-text-field>
+                    <v-text-field
+                      v-model="email"
+                      :error-messages="emailErrors"
+                      label="E-mail"
+                      prepend-icon="mdi-email"
+                      required
+                      @input="$v.email.$touch()"
+                      @blur="$v.email.$touch()"
+                    ></v-text-field>
+                    <v-text-field
+                      v-model="password"
+                      :error-messages="passwordErrors"
+                      label="Password"
+                      prepend-icon="mdi-lock-outline"
+                      required
+                      @change="$v.password.$touch()"
+                      @blur="$v.password.$touch()"
+                    ></v-text-field>
+                    <v-checkbox
+                      v-model="checkbox"
+                      :error-messages="checkboxErrors"
+                      label="Do you agree?"
+                      color="primary"
+                      required
+                      @change="$v.checkbox.$touch()"
+                      @blur="$v.checkbox.$touch()"
+                    ></v-checkbox>
+                  </form>
+
+                  <v-btn color="primary" outlined rounded large @click="submit">
+                    GET STARTED
+                  </v-btn>
+                </v-card-text>
+              </v-col>
+            </v-row>
+          </v-card>
+    </template>
   </v-dialog>
 </template>
 
