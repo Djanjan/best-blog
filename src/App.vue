@@ -8,7 +8,7 @@
     </appBar>
 
     <v-content>
-      <v-container fluid>
+      <v-container fluid style="padding: 0px 0px 0px 0px;">
         <router-view></router-view>
       </v-container>
     </v-content>
@@ -42,9 +42,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.row{
-  padding: 0px 15px 0px 0px;
-}
-</style>

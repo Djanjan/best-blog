@@ -1,32 +1,24 @@
 <template>
-<div>
-  <v-skeleton-loader
-    :loading="loading"
-    transition="scale-transition"
-    type="image"
-  >
-          <v-img
-            :src="`https://picsum.photos/1900/1200?image=${40}`"
-            :lazy-src="`https://picsum.photos/10/6?image=${40}`"
-            class="white--text"
-            gradient="to top, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-            contain
-          >
-            <v-row
-              align="center"
-              justify="center"
-              class="fill-height">
-            <v-col
-              align="center"
-              justify="center">
-                <div class="display-4 font-weight-bold">404</div>
-                <div class="subtitle-2">Page Not Found :(</div>
-            </v-col>
-            </v-row>
-          </v-img>
-  </v-skeleton-loader>
-          <hfooter />
-</div>
+  <section style="height: 100vh;">
+    <v-img
+      :src="`https://picsum.photos/1900/1200?image=${40}`"
+      :lazy-src="`https://picsum.photos/10/6?image=${40}`"
+      class="v-img-full"
+      gradient="to top, rgba(0,0,0,.4), rgba(0,0,0,.7)"
+    >
+      <v-layout align-center justify-center style="height:100%;">
+        <v-row align="center" justify="center" style="position: absolute;">
+          <v-col align="center" justify="center" class="white--text">
+            <div class="display-4 font-weight-bold">404</div>
+            <div class="subtitle-2">Page Not Found :(</div>
+          </v-col>
+        </v-row>
+      </v-layout>
+    </v-img>
+    <v-row align="bottom" justify="bottom">
+      <hfooter />
+    </v-row>
+  </section>
 </template>
 
 <script>
@@ -41,7 +33,7 @@ export default {
   }),
   mounted: function () {
     // eslint-disable-next-line no-return-assign
-    setTimeout(() => this.loading = false, 500)
+    setTimeout(() => (this.loading = false), 500)
     // this.loading = false
   },
   methods: {
@@ -51,3 +43,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.v-img-full {
+  height: 100vh;
+}
+</style>
