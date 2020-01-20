@@ -7,7 +7,6 @@
       <v-col
         v-for="n in 30"
         :key="n"
-        class="ml-3"
       >
         <v-skeleton-loader
           :loading="loading"
