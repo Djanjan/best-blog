@@ -16,7 +16,7 @@
       </v-layout>
     </v-img>
     <v-row align="bottom" justify="bottom">
-      <hfooter />
+      <custom-footer />
     </v-row>
   </section>
 </template>
@@ -26,7 +26,7 @@ import hfooter from '../components/Footer.vue'
 
 export default {
   components: {
-    hfooter
+    'custom-footer': hfooter
   },
   data: () => ({
     loading: true

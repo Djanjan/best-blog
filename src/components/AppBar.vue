@@ -1,5 +1,6 @@
 <template>
 <div>
+
 <template v-if="!contentBar.prominent">
     <v-app-bar
     app
@@ -110,12 +111,16 @@
 </template>
 
 <script>
-import menuContext from './MenuContext.vue'
 import { mapActions, mapState, mapGetters } from 'vuex'
+
+import menuContext from './MenuContext.vue'
+import preLoder from '../components/ProgressCircular.vue'
 
 export default {
   components: {
-    menuContext
+    menuContext,
+    // eslint-disable-next-line vue/no-unused-components
+    'progress-bar': preLoder
   },
   data: () => ({
     loading: true,

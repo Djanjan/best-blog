@@ -7,5 +7,6 @@ module.exports = {
     ? '/best-blog/'
     : '',
 
-  lintOnSave: false
+  lintOnSave: false,
+  runtimeCompiler: true
 }
