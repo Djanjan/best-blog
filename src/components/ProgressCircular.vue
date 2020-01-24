@@ -1,9 +1,7 @@
 <template>
-<div>
     <v-overlay :value="true" :absolute="absolute">
       <v-progress-circular indeterminate size="64" color="primary"></v-progress-circular>
     </v-overlay>
-</div>
 </template>
 <script>
 export default {

@@ -1,7 +1,7 @@
 <template>
   <section style="height: 100vh;">
     <v-img
-      :src="`https://picsum.photos/1900/1200?image=${40}`"
+      src="https://colorlib.com/preview/theme/cocoon/assets/img/bg/about.png"
       :lazy-src="`https://picsum.photos/10/6?image=${40}`"
       class="v-img-full"
       gradient="to top, rgba(0,0,0,.4), rgba(0,0,0,.7)"
