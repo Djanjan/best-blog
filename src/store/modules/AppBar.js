@@ -1,7 +1,7 @@
 export default {
   namespaced: true,
   state: {
-    drawer: true,
+    drawer: false,
     contentBar: {
       prominent: false,
       img: 'https://picsum.photos/1920/1080?random',

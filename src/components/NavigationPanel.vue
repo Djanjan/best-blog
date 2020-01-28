@@ -108,6 +108,7 @@ export default {
     links: [
       { text: 'Home', icon: 'mdi-home', share: '/home' },
       { text: 'Contact', icon: 'mdi-contact-mail', share: '/' },
+      { text: 'Editor', icon: 'mdi-clipboard-text-multiple', share: '/editor' },
       { text: 'Settings', icon: 'mdi-settings', share: '/settings' }
     ]
   }),
