@@ -1,7 +1,11 @@
 export default {
   namespaced: true,
   state: {
-    drawer: true,
+    drawer: false,
+    navigationDrawer: {
+      src: undefined,
+      color: 'primary'
+    },
     contentBar: {
       prominent: false,
       img: 'https://picsum.photos/1920/1080?random',
@@ -34,6 +38,14 @@ export default {
       if (contentBar.title !== null) {
         state.contentBar.title = contentBar.title
       }
+    },
+    Set_Navigation_Drawer (state, value) {
+      if (value.color !== null) {
+        state.navigationDrawer.src = value.src
+      }
+      if (value.color !== null) {
+        state.navigationDrawer.color = value.color
+      }
     }
   },
   actions: {
@@ -48,6 +60,9 @@ export default {
     },
     updateContentBar ({ commit }, contentBar) {
       commit('Update_ContentBar', contentBar)
+    },
+    setNavigationDrawer ({ commit }, value) {
+      commit('Set_Navigation_Drawer', value)
     }
   }
 }

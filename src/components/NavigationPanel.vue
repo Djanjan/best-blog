@@ -1,8 +1,9 @@
 <template>
   <v-navigation-drawer
     v-model="updateDrawer"
-    src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
-    dark
+    :src="navigationDrawer.src"
+    :dark="(navigationDrawer.src !== undefined)||(navigationDrawer.color !== undefined)"
+    :color="navigationDrawer.color"
     app
   >
     <v-skeleton-loader
@@ -71,8 +72,8 @@
     <v-list dense>
       <v-list-item-group
         v-model="selectedItems"
-        active-class="primary"
-        mandatory>
+        :active-class="selectActiveClass"
+        >
         <v-list-item
           link
           v-for="(link, i) in links"
@@ -113,7 +114,8 @@ export default {
   }),
   computed: {
     ...mapState('appBar', {
-      drawer: state => state.drawer
+      drawer: state => state.drawer,
+      navigationDrawer: state => state.navigationDrawer
     }),
     ...mapState('user', {
       logged: state => state.logged,
@@ -135,6 +137,12 @@ export default {
       },
       set (value) {
         this.setDrawer(value)
+      }
+    },
+    selectActiveClass: {
+      get () {
+        let isImg = ((this.navigationDrawer.src !== undefined) && (this.navigationDrawer.color === undefined))
+        return !isImg && (this.navigationDrawer.color === undefined) ? 'primary' : ''
       }
     }
   },
