@@ -114,7 +114,9 @@ export default {
   }),
   computed: {
     ...mapState('appBar', {
-      drawer: state => state.drawer,
+      drawer: state => state.drawer
+    }),
+    ...mapState('theme', {
       navigationDrawer: state => state.navigationDrawer
     }),
     ...mapState('user', {

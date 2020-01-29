@@ -154,6 +154,50 @@
             </v-col>
           </v-row>
         </v-skeleton-loader>
+
+        <v-divider></v-divider>
+
+        <v-skeleton-loader
+          :loading="loading"
+          transition="scale-transition"
+          type="list-item-three-line"
+        >
+          <v-row justify="space-around">
+            <v-col>
+              <span>App Bar Color</span>
+              <v-chip-group
+                column
+                active-class="black--text"
+                v-model="selectedAppBarColor"
+              >
+                <v-chip
+                  v-for="(color, i) in colorsD"
+                  :key="i"
+                  :color="color.cod"
+                  filter
+                >
+                  {{ color.name }}
+                </v-chip>
+              </v-chip-group>
+            </v-col>
+          </v-row>
+        </v-skeleton-loader>
+
+        <v-divider></v-divider>
+
+        <v-skeleton-loader
+          :loading="loading"
+          transition="scale-transition"
+          type="list-item-three-line"
+        >
+          <v-row justify="space-around">
+            <v-col>
+              <span>App Bar Min</span>
+              <v-switch v-model="selectedAppBarMin" color="primary"> </v-switch>
+            </v-col>
+          </v-row>
+        </v-skeleton-loader>
+
       </v-card>
     </v-card-text>
 
@@ -282,7 +326,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   data: () => ({
@@ -323,6 +367,9 @@ export default {
     ]
   }),
   computed: {
+    ...mapState('theme', {
+      appBarProp: state => state.appBar
+    }),
     selectedColorPrimary: {
       get () {
         return this.value
@@ -380,6 +427,33 @@ export default {
           })
         }
       }
+    },
+    selectedAppBarColor: {
+      get () {
+        return this.value
+      },
+      set (item) {
+        if (item !== undefined) {
+          this.setAppBar({
+            isMin: this.appBarProp.isMin,
+            color: this.colorsD[item].cod,
+            src: undefined
+          })
+        }
+      }
+    },
+    selectedAppBarMin: {
+      get () {
+        return this.value
+      },
+      set (item) {
+        if (item !== undefined) {
+          this.setAppBar({
+            isMin: item,
+            color: this.appBarProp.color
+          })
+        }
+      }
     }
   },
   mounted: function () {
@@ -388,7 +462,10 @@ export default {
     // this.loading = false
   },
   methods: {
-    ...mapActions('appBar', ['setNavigationDrawer'])
+    ...mapActions('theme', [
+      'setNavigationDrawer',
+      'setAppBar'
+    ])
   }
 }
 </script>

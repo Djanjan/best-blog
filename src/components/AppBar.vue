@@ -2,21 +2,24 @@
 <div>
 
 <template v-if="!contentBar.prominent">
+  <template v-if="!appBarProp.isMin">
     <v-app-bar
     app
     flat
     height="80px"
     min-width="130px"
     transition="slide-y-transition"
-    :collapse="!collapseOnScroll"
-    :collapse-on-scroll="collapseOnScroll"
-    elevation="16"
+    hide-on-scroll
+    :elevation="appBarProp.isMin ? 0 : 16"
+    :color="appBarProp.isMin ? 'transparent' : appBarProp.color"
+    :dark="(appBarProp.color !== undefined)||(appBarProp.isMin)"
   >
     <v-app-bar-nav-icon
       class="ml-2 v-btn--contained v-btn--fab v-btn--round v-size--small"
+      :style="appBarProp.isMin ? 'background: ' + appBarProp.color : ''"
       @click.stop="toggleDrawer"
     />
-    <v-toolbar-title>Blog</v-toolbar-title>
+    <v-toolbar-title v-if="!appBarProp.isMin">Blog</v-toolbar-title>
 
     <v-progress-linear
         :active="false"
@@ -28,19 +31,26 @@
 
     <v-spacer />
 
-    <v-checkbox
-      v-model="collapseOnScroll"
-      color="primary"
-      hide-details
-      class="ml-5"
-    ></v-checkbox>
-
-    <v-btn icon>
+    <v-btn icon v-if="!appBarProp.isMin">
       <v-icon>mdi-magnify</v-icon>
     </v-btn>
-
-    <menuContext />
   </v-app-bar>
+  </template>
+
+  <template v-else>
+    <v-btn
+      fab
+      dark
+      fixed
+      bottom
+      right
+      :color="appBarProp.color === undefined ? 'primary' : appBarProp.color"
+      @click.stop="toggleDrawer"
+    >
+      <v-icon>mdi-menu</v-icon>
+    </v-btn>
+  </template>
+
 </template>
 
 <template v-else>
@@ -115,9 +125,10 @@ import { mapActions, mapState, mapGetters } from 'vuex'
 
 import menuContext from './MenuContext.vue'
 import preLoder from '../components/ProgressCircular.vue'
-
+//  color="transparent"
 export default {
   components: {
+    // eslint-disable-next-line vue/no-unused-components
     menuContext,
     // eslint-disable-next-line vue/no-unused-components
     'progress-bar': preLoder
@@ -129,6 +140,9 @@ export default {
   computed: {
     ...mapState('appBar', {
       contentBar: state => state.contentBar
+    }),
+    ...mapState('theme', {
+      appBarProp: state => state.appBar
     }),
     ...mapGetters('appBar', [
       'getContentBar'

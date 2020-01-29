@@ -4,13 +4,15 @@ import Vuex from 'vuex'
 // import modules from './modules'
 import appBar from './modules/AppBar.js'
 import user from './modules/User.js'
+import theme from './modules/Theme.js'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
     appBar,
-    user
+    user,
+    theme
   },
   state: {
     dialog: false,
