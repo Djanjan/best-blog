@@ -1,7 +1,12 @@
 <template>
   <div>
-    <v-row v-for="n in 30" :key="n">
+    <v-row v-for="n in 10" :key="n">
       <v-col>
+        <v-skeleton-loader
+          :loading="loading"
+          transition="scale-transition"
+          type="card"
+        >
         <v-card class="ma-5 mb-auto">
             <v-card class="text-center v-card--offset ml-2"
                 max-width="calc(100% - 32px)" outlined>
@@ -67,6 +72,7 @@
             </v-btn>
           </v-card-actions>
         </v-card>
+        </v-skeleton-loader>
       </v-col>
     </v-row>
   </div>

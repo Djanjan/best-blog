@@ -5,7 +5,7 @@
       justify="space-between"
     >
       <v-col
-        v-for="n in 30"
+        v-for="n in 10"
         :key="n"
       >
         <v-skeleton-loader

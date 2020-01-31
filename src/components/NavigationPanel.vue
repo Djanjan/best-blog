@@ -2,10 +2,20 @@
   <v-navigation-drawer
     v-model="updateDrawer"
     :src="navigationDrawer.src"
-    :dark="(navigationDrawer.src !== undefined)||(navigationDrawer.color !== undefined)"
-    :color="navigationDrawer.color"
     app
+    :color="
+        $vuetify.theme.dark ? 'primary darken-1' : 'primary lighten-1'
+      "
+    :permanent="$vuetify.breakpoint.md ? true : false"
+    :expand-on-hover="$vuetify.breakpoint.md ? true : false"
   >
+    <v-list dense>
+      <v-list-item>
+          <h1 class="my-5 font-weight-medium headline">JB</h1>
+          <h1 class="my-5 font-weight-medium headline">log</h1>
+      </v-list-item>
+    </v-list>
+
     <v-skeleton-loader
       :loading="loading"
       transition="scale-transition"
@@ -72,7 +82,7 @@
     <v-list dense>
       <v-list-item-group
         v-model="selectedItems"
-        :active-class="selectActiveClass"
+        active-class="secondary lighten-1"
         >
         <v-list-item
           link
@@ -139,12 +149,6 @@ export default {
       },
       set (value) {
         this.setDrawer(value)
-      }
-    },
-    selectActiveClass: {
-      get () {
-        let isImg = ((this.navigationDrawer.src !== undefined) && (this.navigationDrawer.color === undefined))
-        return !isImg && (this.navigationDrawer.color === undefined) ? 'primary' : ''
       }
     }
   },
