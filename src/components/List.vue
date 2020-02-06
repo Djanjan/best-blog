@@ -91,8 +91,7 @@ export default {
   },
   data: () => ({
     loading: true,
-    isActive: false,
-    dialog: false
+    isActive: false
   }),
   mounted: function () {
     // eslint-disable-next-line no-return-assign
@@ -104,17 +103,10 @@ export default {
       return Math.floor(Math.random() * (100 - 1 + 1)) + 1
     },
     openArticle: function (id) {
-      this.updateContentBar({
-        img: 'https://picsum.photos/1920/1080?image=' + (id * 10 + 10),
-        title: 'Article ' + id
-      })
-      this.toggleContentBar()
       this.$router.push({ name: 'article', params: { id: id } })
     },
     ...mapActions('appBar', [
-      'toggleDrawer',
-      'toggleContentBar',
-      'updateContentBar'
+      'toggleDrawer'
     ])
   }
 }

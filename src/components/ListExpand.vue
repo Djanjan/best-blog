@@ -84,8 +84,7 @@ import { mapActions } from 'vuex'
 export default {
   data: () => ({
     loading: true,
-    isActive: false,
-    dialog: false
+    isActive: false
   }),
   computed: {
     getSrcImg: function () {
@@ -102,17 +101,10 @@ export default {
       return Math.floor(Math.random() * (val - 1 + 1)) + 1
     },
     openArticle: function (id) {
-      this.updateContentBar({
-        img: 'https://picsum.photos/1920/1080?image=' + (id * 21 + 12),
-        title: 'Article ' + id
-      })
-      this.toggleContentBar()
       this.$router.push({ name: 'article', params: { id: id } })
     },
     ...mapActions('appBar', [
-      'toggleDrawer',
-      'toggleContentBar',
-      'updateContentBar'
+      'toggleDrawer'
     ])
   }
 }

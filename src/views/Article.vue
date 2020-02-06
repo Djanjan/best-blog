@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions } from 'vuex'
 
 import preLoder from '../components/ProgressCircular.vue'
 
@@ -31,9 +31,7 @@ export default {
     'article-content': AsyncComponent
   },
   computed: {
-    ...mapState('appBar', {
-      contentBar: state => state.contentBar
-    })
+
   },
   created: function () {
     // console.log(this.$store.state.appBar.contentBar)
@@ -44,13 +42,11 @@ export default {
     // this.loading = false
   },
   beforeDestroy: function () {
-    this.toggleContentBar()
+    // this.toggleContentBar()
   },
   methods: {
     ...mapActions('appBar', [
-      'toggleDrawer',
-      'toggleContentBar',
-      'updateContentBar'
+      'toggleDrawer'
     ])
   }
 }
