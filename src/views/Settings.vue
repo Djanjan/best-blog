@@ -279,7 +279,7 @@ export default {
     },
     selectedMode: {
       get () {
-        return this.value
+        return this.$vuetify.theme.dark
       },
       set (item) {
         if (item !== undefined) {
@@ -287,6 +287,9 @@ export default {
         }
       }
     }
+  },
+  created: function () {
+
   },
   mounted: function () {
     // eslint-disable-next-line no-return-assign
