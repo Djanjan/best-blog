@@ -1,107 +1,106 @@
 <template>
   <div>
-    <v-row v-for="n in 10" :key="n">
+    <template v-if="this.articls.length !== 0">
+      <v-row v-for="(article,i) in this.articls" :key="i">
       <v-col>
         <v-skeleton-loader
           :loading="loading"
           transition="scale-transition"
           type="card"
         >
-        <v-card class="ma-5 mb-auto">
-            <v-card class="text-center v-card--offset ml-2"
-                max-width="calc(100% - 32px)" outlined>
-                <h2 class="pt-2 mx-3">30</h2>
-                <div class="font-weight-light" style="font-size: 12px;">january</div>
-                <span class="font-weight-light" style="font-size: 12px;">2020</span>
-            </v-card>
-
-                    <v-hover
-        v-slot:default="{ hover }"
-        close-delay="100"
-        >
-          <v-img
-            :src="`https://picsum.photos/500/300?image=${n * 21 + 12}`"
-            :lazy-src="`https://picsum.photos/10/6?image=${n * 21 + 12}`"
-            gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-            height="100%"
-            width="100%"
-          >
-            <template v-slot:placeholder>
-              <v-row
-                class="fill-height ma-0"
-                align="center"
-                justify="center"
-              >
-                <v-progress-circular indeterminate color="primary"></v-progress-circular>
-              </v-row>
-            </template>
-            <v-fade-transition>
-              <v-overlay
-                v-if="hover"
-                absolute
-                color="primary"
-              >
-                <v-btn icon large
-                  @click.stop="openArticle(n)"><v-icon>mdi-application</v-icon></v-btn>
-              </v-overlay>
-            </v-fade-transition>
-          </v-img>
-                    </v-hover>
-          <v-card-title>A Short Blog Post About Design</v-card-title>
-          <v-card-subtitle>By Loredana Papp-Dinea Design | Inspiration Creative | 3 Comments</v-card-subtitle>
-
-          <v-card-text class="font-weight-light">
-            <div>Etiam finibus consequat ante ac congue. Quisque porttitor porttitor tempus.
-                Donec maximusLorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est,
-                feugiat nec elementum id, suscipit id nulla. Nulla sit amet luctus dolor. Etiam finibus
-                 consequat ante ac congue. Quisque porttitor porttitor tempus. Donec maximus ipsum non ornare vestibulum...</div>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer />
-
-            <v-btn icon>
-              <v-icon>mdi-heart</v-icon>
-            </v-btn>
-
-            <v-btn icon>
-              <v-icon>mdi-bookmark</v-icon>
-            </v-btn>
-
-            <v-btn icon>
-              <v-icon>mdi-share-variant</v-icon>
-            </v-btn>
-          </v-card-actions>
-        </v-card>
+        <article-card :article="{
+          id: article.id,
+          title: article.title,
+          slug: article.slug,
+          subTitle: 'By Loredana Papp-Dinea Design | Inspiration Creative | 3 Comments',
+          created: article.created_at
+        }"></article-card>
         </v-skeleton-loader>
       </v-col>
     </v-row>
+    </template>
+    <template v-else-if="this.articls.length === 0 || this.error !== null">
+      <v-row v-for="n in 10" :key="n">
+      <v-col>
+        <v-skeleton-loader
+          :loading="loading"
+          transition="scale-transition"
+          type="card"
+        >
+          <article-card :article="{
+            id: n,
+            title: 'A Short Blog Post About Design',
+            slug: 'Etiam finibus consequat ante ac congue. Quisque porttitor porttitor tempus. Donec maximusLorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla. Nulla sit amet luctus dolor. Etiam finibus consequat ante ac congue. Quisque porttitor porttitor tempus. Donec maximus ipsum non ornare vestibulum...',
+            subTitle: 'By Loredana Papp-Dinea Design | Inspiration Creative | 3 Comments',
+            created: '2020-01-30 08:08:00'
+          }"></article-card>
+        </v-skeleton-loader>
+      </v-col>
+    </v-row>
+    </template>
+      <v-alert
+        class="v-alert-custom"
+        :value="snackbar"
+        type="error"
+      >
+        {{this.error}}
+      </v-alert>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+import axios from 'axios'
+
+import articleMin from './ArticleMin.vue'
 
 export default {
+  components: {
+    'article-card': articleMin
+  },
   data: () => ({
     loading: true,
-    isActive: false
+    isActive: false,
+    articls: [],
+    snackbar: false,
+    error: null
   }),
   computed: {
     getSrcImg: function () {
       return 'https://picsum.photos/1920/1080?random'
     }
   },
+  created: function () {
+    this.getArticls()
+  },
   mounted: function () {
     // eslint-disable-next-line no-return-assign
-    setTimeout(() => (this.loading = false), 500)
+    // setTimeout(() => (this.loading = false), 500)
     // this.loading = false
   },
   methods: {
     randomNumber: function (val) {
       return Math.floor(Math.random() * (val - 1 + 1)) + 1
     },
-    openArticle: function (id) {
-      this.$router.push({ name: 'article', params: { id: id } })
+    getArticls: async function () {
+      try {
+        const response = await axios.get('/all-post')
+        // console.log(response)
+        this.articls = response.data.data
+
+        this.loading = false
+      } catch (err) {
+        console.error(err)
+        this.error = err
+
+        this.errorServer()
+
+        this.loading = false
+      }
+    },
+    errorServer: function () {
+      this.snackbar = true
+      setTimeout(() => (this.snackbar = false), 3000)
     },
     ...mapActions('appBar', [
       'toggleDrawer'
@@ -119,5 +118,14 @@ export default {
   top: -28px;
   position: absolute;
   z-index: 1;
+}
+
+.v-alert-custom {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  width: 90%;
+  z-index: 10;
+  transform: translateX(-50%);
 }
 </style>
