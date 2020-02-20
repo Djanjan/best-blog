@@ -1,56 +1,64 @@
 <template>
   <v-container fluid>
-    <v-row justify="space-between">
-      <v-col cols="12" md="4" class="pa-5">
-        <v-col>
-          <v-list-item-title class="title font-weight-black pa-0 mb-4">Category</v-list-item-title>
-          <p class="font-weight-light body-2" v-for="i in 6" :key="i">Category {{i}}</p>
-        </v-col>
-        <v-col>
-          <v-list-item-title class="title font-weight-black pa-0">Popular Articles</v-list-item-title>
-          <v-container fluid style="padding:0">
-          <v-row>
-            <v-col
-              v-for="n in 9"
-              :key="n"
-              class="d-flex child-flex"
-              cols="4"
+    <v-row>
+      <v-col cols="12" md="12" lg="6">
+          <v-row align="start" justify="space-between">
+          <v-col
+           v-for="n in 3"
+            :key="n"
+            cols="12" md="6">
+            <v-skeleton-loader
+              :loading="loading"
+              transition="scale-transition"
+              type="card"
             >
-              <v-card flat tile class="d-flex">
-                <v-img
-                  :src="`https://picsum.photos/500/300?image=${n * 25 + 10}`"
-                  :lazy-src="`https://picsum.photos/10/6?image=${n * 25 + 10}`"
-                  aspect-ratio="1"
-                >
-                  <template v-slot:placeholder>
-                    <v-row
-                      class="fill-height ma-0"
-                      align="center"
-                      justify="center"
-                    >
-                      <v-progress-circular indeterminate color="primary"></v-progress-circular>
-                    </v-row>
-                  </template>
-                </v-img>
-              </v-card>
-            </v-col>
-          </v-row>
-        </v-container>
-        </v-col>
-        <v-col>
-          <v-list-item-title class="title font-weight-black pa-0 mb-4">Tags</v-list-item-title>
-              <v-chip
-                class="ma-2"
-                label
-                v-for="i in 12" :key="i"
-              >
-                tags {{i}}
-              </v-chip>
-        </v-col>
+            <article-card
+              title="Where to begin"
+              sub-title="Indulgence contrasted sufficient to unpleasant in in insensible favourable.
+              In expression an solicitude principles in do. Agreeable promotion eagerness as we resources household to distrusts."></article-card>
+            </v-skeleton-loader>
+
+          </v-col>
+
+          <v-col cols="12" md="6">
+            <article-card
+              custom-class=""
+              isAvatar
+              avatar="https://randomuser.me/api/portraits/women/14.jpg"
+              title="Where to begin"
+              sub-title="Indulgence contrasted sufficient to unpleasant in in insensible favourable.
+              In expression an solicitude principles in do. Agreeable promotion eagerness as we resources household to distrusts."
+            ></article-card>
+          </v-col>
+        </v-row>
+
       </v-col>
 
-      <v-col md="8" cols="12">
-        <list/>
+      <v-col cols="12" lg="6">
+        <app-layount
+          title="Popular profession">
+          <v-col
+            v-for="n in 6"
+            :key="n"
+            cols="12" md="6">
+            <app-card-category>
+            </app-card-category>
+          </v-col>
+        </app-layount>
+      </v-col>
+
+      <v-col cols="12" lg="6">
+        <app-layount
+          title="Statistic profession"
+          movementId="134134">
+          <v-col
+            v-for="n in 6"
+            :key="n"
+            cols="12" md="6">
+            <app-card-simple circleMin>
+            </app-card-simple>
+          </v-col>
+        </app-layount>
       </v-col>
     </v-row>
 
@@ -59,31 +67,30 @@
 </template>
 
 <script>
-import list from '../components/ListExpand.vue'
+// import list from '../components/ListExpand.vue'
 import hfooter from '../components/Footer.vue'
+
+import AppCardSimple from '../components/AppCardSimple.vue'
+import AppLayout from '../components/AppLayout.vue'
 
 export default {
   name: 'Home',
   components: {
-    'list': list,
+    // 'list': list,
+    'article-card': () => import('../components/ArticleCard.vue'),
+    'app-card-simple': AppCardSimple,
+    'app-card-category': () => import('../components/AppCardCategory.vue'),
+    'app-layount': AppLayout,
     hfooter
   },
   data: () => ({
     cards: '',
-    items: [
-      {
-        color: '#1F7087',
-        src: 'https://cdn.vuetifyjs.com/images/cards/foster.jpg',
-        title: 'Supermodel',
-        artist: 'Foster the People'
-      },
-      {
-        color: '#952175',
-        src: 'https://cdn.vuetifyjs.com/images/cards/halcyon.png',
-        title: 'Halcyon Days',
-        artist: 'Ellie Goulding'
-      }
-    ]
-  })
+    loading: true
+  }),
+  mounted: function () {
+    // eslint-disable-next-line no-return-assign
+    setTimeout(() => (this.loading = false), 1000)
+    // this.loading = false
+  }
 }
 </script>

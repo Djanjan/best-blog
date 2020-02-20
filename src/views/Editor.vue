@@ -162,6 +162,7 @@ Deleted branch hotfix-1.2.1 (was abbe5d6).
     background: var(--v-primary-lighten1);
     min-height: 80px;
 }
+
 .ql-container{
     padding-top: 80px;
 }

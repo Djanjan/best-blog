@@ -38,7 +38,7 @@
             <v-row class="fill-height ma-0" align="center" justify="center">
               <v-progress-circular
                 indeterminate
-                color="primary"
+                color="secondary"
               ></v-progress-circular>
             </v-row>
           </template>
@@ -51,7 +51,7 @@
             <v-card class="px-5 pb-3" max-width="100%" width="400">
               <v-sheet
                 class="v-sheet--offset mx-auto pa-8 text-center"
-                color="primary"
+                color="secondary"
                 elevation="12"
                 dark
                 max-width="calc(100% - 32px)"
@@ -106,7 +106,7 @@
                   ></v-text-field>
                 </form>
 
-                <v-btn color="primary" text rounded large @click="submit">
+                <v-btn color="secondary" text rounded large @click="submit">
                   LET'S GO
                 </v-btn>
               </v-card-text>
@@ -134,7 +134,7 @@
       <v-card class="px-5 pb-3" min-width="100%">
         <v-sheet
           class="mx-auto pa-8 text-center mb-3"
-          color="primary"
+          color="secondary"
           elevation="12"
           dark
           max-width="calc(100% - 32px)"
@@ -189,7 +189,7 @@
             ></v-text-field>
           </form>
 
-          <v-btn color="primary" text rounded large @click="submit">
+          <v-btn color="secondary" text rounded large @click="submit">
             LET'S GO
           </v-btn>
         </v-card-text>

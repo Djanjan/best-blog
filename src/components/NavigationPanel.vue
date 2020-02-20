@@ -1,13 +1,16 @@
 <template>
+<div>
+
+<template v-if="$vuetify.breakpoint.mdAndUp ? true : false">
   <v-navigation-drawer
     v-model="updateDrawer"
     :src="navigationDrawer.src"
     app
-    :color="
-        $vuetify.theme.dark ? 'primary darken-1' : 'primary lighten-1'
-      "
-    :permanent="$vuetify.breakpoint.md ? true : false"
-    :expand-on-hover="$vuetify.breakpoint.md ? true : false"
+    :mini-variant="true"
+    :mini-variant-width="120"
+    :permanent="true"
+    color="transparent"
+    floating
   >
     <v-list dense>
       <v-list-item>
@@ -16,111 +19,54 @@
       </v-list-item>
     </v-list>
 
-    <v-skeleton-loader
-      :loading="loading"
-      transition="scale-transition"
-      type="list-item-avatar-two-line"
-    >
-    <div>
-    <template v-if="logged">
     <v-list dense>
-      <v-list-group
-        value="false"
-        no-action
-      >
-        <template v-slot:activator>
-          <v-list-item-avatar>
-            <v-img :src="userDate.avatar"></v-img>
-          </v-list-item-avatar>
-          <v-list-item-content>
-            <v-list-item-title>{{userDate.login}}</v-list-item-title>
-            <v-list-item-subtitle>{{userDate.email}}</v-list-item-subtitle>
-          </v-list-item-content>
-        </template>
-
-        <v-list-item link @click.stop="logout()">
-          <v-list-item-action>
-            <v-icon>mdi-exit-to-app</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Logout</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-      </v-list-group>
-    </v-list>
-    </template>
-
-    <template v-else>
-      <v-list>
-        <v-list-item
-          link
-          @click.stop="toggleDialogLogin()">
-          <v-list-item-action>
-            <v-icon>mdi-exit-to-app</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Login</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-
-      <loginDialog/>
-      <register-dialog />
-
-    </template>
-    </div>
-    </v-skeleton-loader>
-
-    <v-divider></v-divider>
-
-    <v-skeleton-loader
-      :loading="loading"
-      transition="scale-transition"
-      type="list-item-three-line"
-    >
-    <v-list dense>
-      <v-list-item-group
-        v-model="selectedItems"
-        active-class="secondary lighten-1"
-        >
-        <v-list-item
-          link
+      <v-item-group v-model="selectedItems">
+        <v-row
           v-for="(link, i) in links"
-          :key="i">
-          <v-list-item-action>
-            <v-icon>{{link.icon}}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>{{link.text}}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list-item-group>
+          :key="i" align="center" justify="center">
+            <v-item v-slot:default="{ active, toggle }">
+              <v-btn
+                icon class="ma-2" @click.stop="toggle">
+                <v-icon :color="active ? 'secondary' : ''">{{link.icon}}</v-icon>
+              </v-btn>
+            </v-item>
+          </v-row>
+      </v-item-group>
     </v-list>
-    </v-skeleton-loader>
 
   </v-navigation-drawer>
+</template>
+
+<template v-else>
+<v-bottom-navigation
+    v-model="selectedItems"
+    app
+    shift
+    color="secondary"
+    background-color="tertiary"
+  >
+    <v-btn v-for="(link, i) in links"
+          :key="i"
+          fab>
+      <span>{{link.text}}</span>
+      <v-icon>{{link.icon}}</v-icon>
+    </v-btn>
+</v-bottom-navigation>
+</template>
+
+</div>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
 
-import loginDialog from '../views/Login.vue'
-import registerDialog from '../views/Register.vue'
-
 export default {
-  components: {
-    loginDialog,
-    'register-dialog': registerDialog
-  },
   data: () => ({
     loading: true,
-    openLoginPage: false,
     links: [
       { text: 'Home', icon: 'mdi-home', share: '/home' },
-      { text: 'Contact', icon: 'mdi-contact-mail', share: '/' },
-      { text: 'Editor', icon: 'mdi-clipboard-text-multiple', share: '/editor' },
-      { text: 'Settings', icon: 'mdi-settings', share: '/settings' }
+      { text: 'Category', icon: 'mdi-shape', share: '/category' },
+      { text: 'Search', icon: 'mdi-magnify', share: '/search' }
     ]
   }),
   computed: {
@@ -129,10 +75,6 @@ export default {
     }),
     ...mapState('theme', {
       navigationDrawer: state => state.navigationDrawer
-    }),
-    ...mapState('user', {
-      logged: state => state.logged,
-      userDate: state => state.date
     }),
     selectedItems: {
       get () {
@@ -167,14 +109,11 @@ export default {
     },
     ...mapActions('appBar', [
       'setDrawer'
-    ]),
-    ...mapActions('user', [
-      'toggleLogged',
-      'logout'
-    ]),
-    ...mapActions([
-      'toggleDialogLogin'
     ])
   }
 }
 </script>
+
+<style scoped lang="scss">
+
+</style>

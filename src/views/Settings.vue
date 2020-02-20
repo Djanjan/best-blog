@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card-text class="pa-6">
+    <v-card-text class="mt-7">
       <v-skeleton-loader
         :loading="loading"
         transition="scale-transition"

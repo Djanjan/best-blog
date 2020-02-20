@@ -2,22 +2,13 @@
   <div>
       <template v-if="$vuetify.breakpoint.xs || $vuetify.breakpoint.sm">
         <v-app-bar
-          app
+          absolute
           transition="slide-y-transition"
-          hide-on-scroll
-          elevation="16"
-          :color="
-            $vuetify.theme.dark ? 'primary darken-1' : 'primary lighten-1'
-          "
-          style="top: initial;"
-          bottom
+          color="transparent"
+          height="70px"
+          flat
         >
-          <v-app-bar-nav-icon
-            class=""
-            :style="appBarProp.isMin ? 'background: ' + appBarProp.color : ''"
-            @click.stop="toggleDrawer"
-          />
-          <v-toolbar-title>Blog</v-toolbar-title>
+          <v-toolbar-title class="font-weight-bold headline">JBlog</v-toolbar-title>
 
           <v-progress-linear
             :active="false"
@@ -29,8 +20,9 @@
 
           <v-spacer></v-spacer>
 
-          <v-btn icon>
-            <v-icon>mdi-magnify</v-icon>
+          <login-button v-if="curectPath === '/home'"/>
+          <v-btn v-else icon @click.stop="$router.push('/settings')">
+            <v-icon>mdi-settings</v-icon>
           </v-btn>
 
           <v-btn
@@ -61,25 +53,42 @@ import { mapActions, mapState, mapGetters } from 'vuex'
 
 import menuContext from './MenuContext.vue'
 import preLoder from '../components/ProgressCircular.vue'
-//  color="transparent"
+import LoginButton from '../components/LoginButton.vue'
+
 export default {
   components: {
     // eslint-disable-next-line vue/no-unused-components
     menuContext,
     // eslint-disable-next-line vue/no-unused-components
-    'progress-bar': preLoder
+    'progress-bar': preLoder,
+    'login-button': LoginButton
   },
   data: () => ({
-    loading: true
+    loading: true,
+    curectPath: '/home'
   }),
+  watch: {
+    '$route.params.search': {
+      handler: function () {
+        this.curectPath = this.$router.currentRoute.path
+      },
+      deep: true,
+      immediate: true
+    }
+  },
   computed: {
     ...mapState('theme', {
       appBarProp: state => state.appBar
     }),
-    ...mapGetters('appBar', ['getContentBar'])
+    ...mapGetters('appBar', ['getContentBar']),
+    selectedRouter: {
+      get () {
+        return this.$router.currentRoute.path
+      }
+    }
   },
   created: function () {
-    // console.log(this.$store.state.appBar.contentBar)
+    // console.log(this.$router.currentRoute.path)
   },
   mounted: function () {
     // eslint-disable-next-line no-return-assign

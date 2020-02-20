@@ -1,10 +1,10 @@
-import colors from 'vuetify/lib/util/colors'
+// import colors from 'vuetify/lib/util/colors'
 
 export default {
   primary: {
-    base: '#ff8a80',
-    lighten1: '#ffbcaf',
-    darken1: '#c85a54'
+    base: '#89f7fe',
+    lighten1: '#beffff',
+    darken1: '#52c4cb'
   },
   secondary: {
     base: '#c2185b',
@@ -13,6 +13,10 @@ export default {
   },
   // All keys will generate theme styles,
   // Here we add a custom `tertiary` color
-  tertiary: colors.pink.base
+  tertiary: {
+    base: '#66a6ff',
+    lighten1: '#9dd7ff',
+    darken1: '#2378cb'
+  }
   // background: '#ffbcaf'
 }

@@ -38,7 +38,7 @@
           <v-row class="fill-height ma-0" align="center" justify="center">
             <v-progress-circular
               indeterminate
-              color="primary"
+              color="secondary"
             ></v-progress-circular>
           </v-row>
         </template>
@@ -51,7 +51,7 @@
           <v-card class="px-5 pb-3" max-width="100%" width="800">
             <v-sheet
               class="v-sheet--offset mx-auto pa-8 text-center"
-              color="primary"
+              color="secondary"
               elevation="12"
               dark
               max-width="calc(100% - 32px)"
@@ -157,14 +157,14 @@
                       v-model="checkbox"
                       :error-messages="checkboxErrors"
                       label="Do you agree?"
-                      color="primary"
+                      color="secondary"
                       required
                       @change="$v.checkbox.$touch()"
                       @blur="$v.checkbox.$touch()"
                     ></v-checkbox>
                   </form>
 
-                  <v-btn color="primary" outlined rounded large @click="submit">
+                  <v-btn color="secondary" outlined rounded large @click="submit">
                     GET STARTED
                   </v-btn>
                 </v-card-text>
@@ -196,7 +196,7 @@
     <v-card class="px-5 pb-3" min-width="100%">
             <v-sheet
               class="mx-auto pa-8 text-center"
-              color="primary"
+              color="secondary"
               elevation="12"
               dark
               max-width="calc(100% - 32px)"
@@ -253,14 +253,14 @@
                       v-model="checkbox"
                       :error-messages="checkboxErrors"
                       label="Do you agree?"
-                      color="primary"
+                      color="secondary"
                       required
                       @change="$v.checkbox.$touch()"
                       @blur="$v.checkbox.$touch()"
                     ></v-checkbox>
                   </form>
 
-                  <v-btn color="primary" outlined rounded large @click="submit">
+                  <v-btn color="secondary" outlined rounded large @click="submit">
                     GET STARTED
                   </v-btn>
                 </v-card-text>
