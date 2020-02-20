@@ -44,6 +44,7 @@
     shift
     color="secondary"
     background-color="tertiary"
+    class="d-flex justify-space-around"
   >
     <v-btn v-for="(link, i) in links"
           :key="i"
