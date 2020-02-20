@@ -7,7 +7,7 @@
 
     <div style="height: 0px;">
       <template v-if="!circleMin">
-        <v-avatar color="white" :size="circleSize+10" :style="'top:' + -((circleSize/2)+6) + 'px ; left:15px'">
+        <v-avatar :color="$vuetify.theme.dark ? '#424242':'white'" :size="circleSize+10" :style="'top:' + -((circleSize/2)+6) + 'px ; left:15px'">
         <v-avatar :color="circleColor" :size="circleSize">
           <v-icon v-if="!isAvatar" color="white" :size="circleSize/2">{{icon}}</v-icon>
           <img v-else :src="this.avatar"/>

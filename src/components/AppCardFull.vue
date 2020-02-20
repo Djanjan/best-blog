@@ -11,7 +11,7 @@
       class="d-flex justify-center"
       :style="'height:'+circleSize/2 +'px;'">
       <v-avatar
-        color="white"
+        :color="$vuetify.theme.dark ? '#424242':'white'"
         :size="circleSize+12"
         :style="'top:' + -((circleSize/2)+4) + 'px ;'">
         <v-avatar

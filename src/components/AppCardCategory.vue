@@ -16,7 +16,7 @@
        <div
           class="d-flex justify-center align-center"
           style="width: 0px;">
-            <v-avatar color="white" :size="circleSize+10">
+            <v-avatar :color="$vuetify.theme.dark ? '#424242':'white'" :size="circleSize+10">
                 <v-avatar :color="circleColor" :size="circleSize">
                     <app-icon
                         :icon="icon"
