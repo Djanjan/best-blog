@@ -2,8 +2,9 @@
     <v-hover
       v-slot:default="{ hover }">
     <v-card
-      :class="customClass"
-      :elevation="hover ? 20 : 2">
+      :class="customClass+'a-link'"
+      :elevation="hover ? 20 : 2"
+      v-ripple="{ class: 'primary--text' }">
 
     <slot name="img"></slot>
 
@@ -76,3 +77,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.a-link {
+  cursor: pointer;
+}
+</style>

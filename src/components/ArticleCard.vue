@@ -11,6 +11,8 @@
                   max-height="250px"
                   src="https://picsum.photos/500/300?random"
                   lazy-src="https://picsum.photos/10/6?random"
+                  :aspect-ratio="16/9"
+                  transition="fade-transition"
                 >
                 </v-img>
               </template>

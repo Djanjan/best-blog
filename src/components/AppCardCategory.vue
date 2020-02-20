@@ -1,5 +1,10 @@
 <template>
-    <v-card :class="customClass">
+    <v-hover
+      v-slot:default="{ hover }">
+    <v-card
+      :class="customClass+'a-link'"
+      :elevation="hover ? 20 : 2"
+      v-ripple="{ class: 'primary--text' }">
         <v-row no-gutters>
 
         <v-col cols="5">
@@ -37,6 +42,7 @@
         </v-col>
         </v-row>
     </v-card>
+    </v-hover>
 </template>
 
 <script>
@@ -69,3 +75,9 @@ export default {
   })
 }
 </script>
+
+<style lang="scss" scoped>
+.a-link {
+  cursor: pointer;
+}
+</style>
