@@ -3,7 +3,7 @@
 
     <nav-panel-left />
 
-    <v-content class="background-lighten">
+    <v-content :class="$vuetify.theme.dark == false ? 'background-lighten' : ''">
       <v-container fluid :style="$vuetify.breakpoint.mdAndUp ? 'padding: 0px 0px 0px 0px;' : 'padding: 40px 0px 0px 0px; margin: 0px 0px 40px 0px;'">
         <transition name="slide-fade" mode="out-in">
         <router-view></router-view>

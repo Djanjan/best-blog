@@ -3,13 +3,13 @@
         <v-row no-gutters>
 
         <v-col cols="5">
-        <v-img
+          <v-img
             src="https://picsum.photos/500/300?random"
             lazy-src="https://picsum.photos/10/6?random"
             height="100%"
             width="100%"
-       >
-       </v-img>
+          >
+          </v-img>
         </v-col>
 
        <v-col cols="1" class="d-flex justify-start align-center">
