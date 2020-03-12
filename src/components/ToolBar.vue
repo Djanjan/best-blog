@@ -20,9 +20,9 @@
 
           <v-spacer></v-spacer>
 
-          <login-button v-if="curectPath === '/home'"/>
-          <v-btn v-else icon @click.stop="$router.push('/settings')">
-            <v-icon>mdi-settings</v-icon>
+          <login-button v-if="curectPath === '/app/home'"/>
+          <v-btn v-else icon @click.stop="$router.push('settings')">
+            <v-icon>mdi-cog</v-icon>
           </v-btn>
 
           <v-btn
@@ -65,7 +65,7 @@ export default {
   },
   data: () => ({
     loading: true,
-    curectPath: '/home'
+    curectPath: '/app/home'
   }),
   watch: {
     '$route.params.search': {
