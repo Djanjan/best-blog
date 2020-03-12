@@ -1,5 +1,5 @@
 <template>
-  <section style="height: 100vh;">
+  <section :style="$vuetify.breakpoint.mdAndUp ? 'height: 100vh;' : 'height: 100vh; margin-top: 30px; margin-bottom: -40px;'">
     <v-img
       src="https://colorlib.com/preview/theme/cocoon/assets/img/bg/about.png"
       :lazy-src="`https://picsum.photos/10/6?image=${40}`"

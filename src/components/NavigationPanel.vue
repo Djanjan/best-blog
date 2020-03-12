@@ -12,14 +12,14 @@
     color="transparent"
     floating
   >
-    <v-list dense>
+    <v-list dense color="transparent">
       <v-list-item>
           <h1 class="my-5 font-weight-medium headline">JB</h1>
           <h1 class="my-5 font-weight-medium headline">log</h1>
       </v-list-item>
     </v-list>
 
-    <v-list dense>
+    <v-list dense color="transparent">
       <v-item-group v-model="selectedItems">
         <v-row
           v-for="(link, i) in links"

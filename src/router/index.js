@@ -52,7 +52,7 @@ const routes = [
       {
         path: '*',
         name: 'app-not-found',
-        component: () => import('../views/NotFound.vue')
+        component: () => import('../views/AppNotFound.vue')
       }
     ]
   },
