@@ -14,7 +14,7 @@
     <v-list-item>
       <login-button customClass="ma-6" v-if="curectPath === '/home'"/>
       <v-btn class="ma-6" v-else icon @click.stop="$router.push('/settings')">
-            <v-icon>mdi-settings</v-icon>
+            <v-icon>mdi-cog</v-icon>
       </v-btn>
     </v-list-item>
 

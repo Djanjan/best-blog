@@ -60,13 +60,13 @@
                   Login
                 </h1>
                 <v-btn icon class="ma-1">
-                  <v-icon>mdi-facebook-box</v-icon>
+                  <v-icon>mdi-facebook</v-icon>
                 </v-btn>
                 <v-btn icon class="ma-1">
                   <v-icon>mdi-twitter</v-icon>
                 </v-btn>
                 <v-btn icon class="ma-1">
-                  <v-icon>mdi-github-box</v-icon>
+                  <v-icon>mdi-github</v-icon>
                 </v-btn>
               </v-sheet>
 

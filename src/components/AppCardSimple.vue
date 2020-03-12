@@ -23,7 +23,7 @@
       </template>
     </div>
 
-    <v-list-item two-line class="text-right" style="padding-left: 130px;">
+    <v-list-item two-line class="text-right" style="padding-left: 110px;">
                 <v-list-item-content>
                     <v-list-item-title class="subtitle-1 mb-1"  style="white-space: normal;">Landscape design</v-list-item-title>
                     <v-list-item-subtitle class="subtitle-2" style="white-space: normal;">Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>

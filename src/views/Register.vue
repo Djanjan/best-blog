@@ -119,7 +119,7 @@
                     <v-icon>mdi-twitter</v-icon>
                   </v-btn>
                   <v-btn dark fab class="ma-1">
-                    <v-icon>mdi-github-box</v-icon>
+                    <v-icon>mdi-github</v-icon>
                   </v-btn>
                   <div class="text-center grey--text body-1 font-weight-light">
                     Or Login
