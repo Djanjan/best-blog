@@ -1,14 +1,8 @@
 <template>
-  <v-dialog
-    v-model="openDialog"
-    fullscreen
-    hide-overlay
-    transition="dialog-bottom-transition"
-    class="overflow-hidden"
-  >
+  <div>
     <template v-if="!$vuetify.breakpoint.xs">
-    <v-toolbar flat color="transparent" absolute dark height="80px">
-      <v-btn icon @click="toggleDialogRegister()" class="ml-1">
+    <v-toolbar flat color="transparent" absolute dark height="80px" width="100%">
+      <v-btn icon @click="closePage()" class="ml-1">
         <v-icon>mdi-close</v-icon>
       </v-btn>
 
@@ -18,7 +12,7 @@
 
       <v-toolbar-items class="mr-7 hidden-xs-and-down">
         <v-btn dark text><v-icon left>mdi-home</v-icon>Home</v-btn>
-        <v-btn dark text @click.stop="toggleDialogRegister()"
+        <v-btn dark text @click.stop="openLoginPage()"
           ><v-icon left>mdi-exit-to-app</v-icon>Login</v-btn
         >
         <v-btn dark text
@@ -178,7 +172,7 @@
 
     <template v-else>
       <v-toolbar height="80px">
-        <v-btn icon @click="toggleDialogRegister()" class="ml-1">
+        <v-btn icon @click="closePage()" class="ml-1">
           <v-icon>mdi-close</v-icon>
         </v-btn>
 
@@ -187,7 +181,7 @@
         <v-spacer></v-spacer>
 
       <v-toolbar-items class="mr-1">
-        <v-btn icon text @click.stop="toggleDialogRegister()"
+        <v-btn icon text @click.stop="openLoginPage()"
           ><v-icon left>mdi-exit-to-app</v-icon></v-btn
         >
       </v-toolbar-items>
@@ -268,11 +262,11 @@
             </v-row>
           </v-card>
     </template>
-  </v-dialog>
+  </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 import { validationMixin } from 'vuelidate'
 import { required, maxLength, email } from 'vuelidate/lib/validators'
 
@@ -303,9 +297,6 @@ export default {
     checkbox: false
   }),
   computed: {
-    ...mapState({
-      openDialog: state => state.dialogRegister
-    }),
     checkboxErrors () {
       const errors = []
       if (!this.$v.checkbox.$dirty) return errors
@@ -340,10 +331,12 @@ export default {
     // this.loading = false
   },
   methods: {
-    ...mapActions(['toggleDialogRegister', 'toggleDialogLogin']),
     ...mapActions('user', ['authorization']),
     randomNumber: function (value) {
       return Math.floor(Math.random() * (value - 1 + 1)) + 1
+    },
+    openLoginPage () {
+      this.$router.push({ path: '/login' })
     },
     submit () {
       this.$v.$touch()
@@ -371,6 +364,9 @@ export default {
       this.email = ''
       this.password = ''
       this.checkbox = false
+    },
+    closePage () {
+      this.$router.go(-1)
     }
   }
 }

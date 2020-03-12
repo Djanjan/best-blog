@@ -1,14 +1,8 @@
 <template>
-  <v-dialog
-    v-model="openDialog"
-    fullscreen
-    hide-overlay
-    transition="dialog-bottom-transition"
-    class="overflow-hidden"
-  >
+  <div>
     <template v-if="!$vuetify.breakpoint.xs">
-      <v-toolbar flat color="transparent" absolute dark height="80px">
-        <v-btn icon @click="toggleDialogLogin()" class="ml-1">
+      <v-toolbar flat color="transparent" absolute dark height="80px" width="100%">
+        <v-btn icon @click="closePage()" class="ml-1">
           <v-icon>mdi-close</v-icon>
         </v-btn>
 
@@ -18,7 +12,7 @@
 
         <v-toolbar-items class="mr-7 hidden-xs-and-down">
           <v-btn dark text><v-icon left>mdi-home</v-icon>Home</v-btn>
-          <v-btn dark text @click="toggleDialogRegister()"
+          <v-btn dark text @click="openRegsterPage()"
             ><v-icon left>mdi-account-multiple-plus</v-icon>Register</v-btn
           >
           <v-btn dark text
@@ -27,7 +21,7 @@
         </v-toolbar-items>
       </v-toolbar>
 
-      <section style="height: 120vh;">
+      <section style="height: 100vh;">
         <v-img
           src="https://picsum.photos/1900/1200?random"
           lazy-src="https://picsum.photos/10/6?random"
@@ -118,7 +112,7 @@
 
     <template v-else>
       <v-toolbar height="80px">
-        <v-btn icon @click="toggleDialogLogin()" class="ml-1">
+        <v-btn icon @click="closePage()" class="ml-1">
           <v-icon>mdi-close</v-icon>
         </v-btn>
 
@@ -127,7 +121,7 @@
         <v-spacer></v-spacer>
 
         <v-toolbar-items class="mr-1">
-          <v-btn icon text @click="toggleDialogRegister()"
+          <v-btn icon text @click="openRegsterPage()"
             ><v-icon>mdi-account-multiple-plus</v-icon></v-btn>
         </v-toolbar-items>
       </v-toolbar>
@@ -195,11 +189,11 @@
         </v-card-text>
       </v-card>
     </template>
-  </v-dialog>
+  </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 import { validationMixin } from 'vuelidate'
 import { required, maxLength, email } from 'vuelidate/lib/validators'
 
@@ -224,9 +218,6 @@ export default {
     password: ''
   }),
   computed: {
-    ...mapState({
-      openDialog: state => state.dialogLogin
-    }),
     passwordErrors () {
       const errors = []
       if (!this.$v.password.$dirty) return errors
@@ -255,10 +246,12 @@ export default {
     // this.loading = false
   },
   methods: {
-    ...mapActions(['toggleDialogLogin', 'toggleDialogRegister']),
     ...mapActions('user', ['authorization']),
     randomNumber: function (value) {
       return Math.floor(Math.random() * (value - 1 + 1)) + 1
+    },
+    openRegsterPage () {
+      this.$router.push({ path: '/register' })
     },
     submit () {
       this.$v.$touch()
@@ -285,6 +278,9 @@ export default {
       this.name = ''
       this.email = ''
       this.password = ''
+    },
+    closePage () {
+      this.$router.go(-1)
     }
   }
 }
@@ -297,6 +293,6 @@ export default {
 }
 
 .v-img-full {
-  height: 120vh;
+  height: 100vh;
 }
 </style>

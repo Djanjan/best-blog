@@ -65,9 +65,9 @@ export default {
   data: () => ({
     loading: true,
     links: [
-      { text: 'Home', icon: 'mdi-home', share: '/home' },
-      { text: 'Category', icon: 'mdi-shape', share: '/category' },
-      { text: 'Search', icon: 'mdi-magnify', share: '/search' }
+      { text: 'Home', icon: 'mdi-home', share: 'home', allPath: '/app/home' },
+      { text: 'Category', icon: 'mdi-shape', share: 'category', allPath: '/app/category' },
+      { text: 'Search', icon: 'mdi-magnify', share: 'search', allPath: '/app/search' }
     ]
   }),
   computed: {
@@ -82,7 +82,7 @@ export default {
         return this.value
       },
       set (item) {
-        if ((item !== undefined) && (this.$router.currentRoute.path !== this.links[item].share)) {
+        if ((item !== undefined) && (this.$router.currentRoute.path !== this.links[item].allPath)) {
           this.$router.push(this.links[item].share)
         }
       }

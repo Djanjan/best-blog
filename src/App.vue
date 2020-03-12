@@ -1,36 +1,16 @@
 <template>
   <v-app id="inspire">
-
-    <nav-panel-left />
-
-    <v-content :class="!$vuetify.theme.dark ? 'background-lighten' : ''">
-      <v-container fluid :style="$vuetify.breakpoint.mdAndUp ? 'padding: 0px 0px 0px 0px;' : 'padding: 40px 0px 0px 0px; margin: 0px 0px 40px 0px;'">
-        <transition name="slide-fade" mode="out-in">
-        <router-view></router-view>
-        </transition>
-      </v-container>
-    </v-content>
-
-    <nav-panel-rigth/>
-
-    <tool-bar/>
-
+    <router-view></router-view>
   </v-app>
 </template>
 
 <script>
-import navigationPanelLeft from './components/NavigationPanel.vue'
-import navigationPanelRigth from './components/NavigationPanelRigth.vue'
-import toolBar from './components/ToolBar.vue'
 
 export default {
   props: {
     source: String
   },
   components: {
-    'nav-panel-left': navigationPanelLeft,
-    'nav-panel-rigth': navigationPanelRigth,
-    'tool-bar': toolBar
   },
   data: () => ({
   }),
@@ -38,9 +18,6 @@ export default {
     // this.$router.push({ path: '/home' })
   },
   computed: {
-    theme () {
-      return this.$vuetify.theme.dark ? 'dark' : 'light' // :style="{background: $vuetify.theme.themes[theme].background}"
-    }
   },
   methods: {}
 }

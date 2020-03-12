@@ -1,8 +1,6 @@
 <template>
     <div>
-        <login-dialog/>
-        <register-dialog/>
-        <v-btn icon :class="customClass" @click.stop="toggleDialogLogin()">
+        <v-btn icon :class="customClass" @click.stop="openLogin()">
             <v-icon>mdi-account-circle</v-icon>
         </v-btn>
     </div>
@@ -11,14 +9,7 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 
-import loginDialog from '../views/Login.vue'
-import registerDialog from '../views/Register.vue'
-
 export default {
-  components: {
-    'login-dialog': loginDialog,
-    'register-dialog': registerDialog
-  },
   props: {
     customClass: {
       type: String,
@@ -45,6 +36,9 @@ export default {
   methods: {
     randomNumber: function (value) {
       return Math.floor(Math.random() * (value - 1 + 1)) + 1
+    },
+    openLogin: function () {
+      this.$router.push({ path: '/login' })
     },
     ...mapActions('user', [
       'toggleLogged',
