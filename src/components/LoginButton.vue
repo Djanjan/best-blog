@@ -1,9 +1,7 @@
 <template>
-    <div>
         <v-btn icon :class="customClass" @click.stop="openLogin()">
             <v-icon>mdi-account-circle</v-icon>
         </v-btn>
-    </div>
 </template>
 
 <script>

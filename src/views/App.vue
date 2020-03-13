@@ -4,7 +4,7 @@
     <nav-panel-left />
 
     <v-content :class="!$vuetify.theme.dark ? 'background-lighten' : ''">
-      <v-container fluid :style="($vuetify.breakpoint.mdAndUp) || (curectPath.split('/')[2] === 'article') ? 'padding: 0px 0px 0px 0px;' : 'padding: 40px 0px 0px 0px; margin: 0px 0px 40px 0px;'">
+      <v-container fluid :style="($vuetify.breakpoint.mdAndUp) ? 'padding: 0px 0px 0px 0px;' : 'padding: 0px 0px 0px 0px; margin: 0px 0px 40px 0px;'">
         <transition name="slide-fade" mode="out-in">
           <router-view></router-view>
         </transition>
@@ -13,15 +13,14 @@
 
     <nav-panel-rigth/>
 
-    <tool-bar/>
-
   </div>
 </template>
 
 <script>
-import navigationPanelLeft from '../components/NavigationPanel.vue'
-import navigationPanelRigth from '../components/NavigationPanelRigth.vue'
-import toolBar from '../components/ToolBar.vue'
+import { mapState, mapActions } from 'vuex'
+
+import navigationPanelLeft from '../components/TheNavigationPanel.vue'
+import navigationPanelRigth from '../components/TheNavigationPanelRigth.vue'
 
 export default {
   props: {
@@ -29,16 +28,16 @@ export default {
   },
   components: {
     'nav-panel-left': navigationPanelLeft,
-    'nav-panel-rigth': navigationPanelRigth,
-    'tool-bar': toolBar
+    'nav-panel-rigth': navigationPanelRigth
   },
   data: () => ({
-    curectPath: '/app/home'
   }),
   watch: {
     '$route.params.search': {
       handler: function () {
-        this.curectPath = this.$router.currentRoute.path
+        this.setRouter({ name: this.$router.currentRoute.name })
+        // this.curectPath = this.$router.currentRoute.path
+        // console.log(this.curectRouterName)
       },
       deep: true,
       immediate: true
@@ -48,11 +47,16 @@ export default {
     // this.$router.push({ path: 'app/home' })
   },
   computed: {
+    ...mapState('router', {
+      curectRouterName: state => state.name
+    }),
     theme () {
       return this.$vuetify.theme.dark ? 'dark' : 'light' // :style="{background: $vuetify.theme.themes[theme].background}"
     }
   },
-  methods: {}
+  methods: {
+    ...mapActions('router', ['setRouter'])
+  }
 }
 </script>
 

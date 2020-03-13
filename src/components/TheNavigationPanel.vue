@@ -2,15 +2,13 @@
   <div>
     <template v-if="$vuetify.breakpoint.mdAndUp ? true : false">
       <v-navigation-drawer
-        v-model="updateDrawer"
-        :src="navigationDrawer.src"
         app
         :mini-variant="true"
         :mini-variant-width="120"
         :permanent="true"
         color="transparent"
         floating
-        v-if="(curectPath.split('/')[2] !== 'article') || $vuetify.breakpoint.lgAndUp"
+        v-if="((curectRouterName !== 'article')&&(curectRouterName !== 'comments')) || $vuetify.breakpoint.lgAndUp"
       >
         <v-list dense color="transparent">
           <v-list-item>
@@ -59,7 +57,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   data: () => ({
@@ -78,24 +76,11 @@ export default {
         share: 'search',
         allPath: '/app/search'
       }
-    ],
-    curectPath: '/app/home'
+    ]
   }),
-  watch: {
-    '$route.params.search': {
-      handler: function () {
-        this.curectPath = this.$router.currentRoute.path
-      },
-      deep: true,
-      immediate: true
-    }
-  },
   computed: {
-    ...mapState('appBar', {
-      drawer: state => state.drawer
-    }),
-    ...mapState('theme', {
-      navigationDrawer: state => state.navigationDrawer
+    ...mapState('router', {
+      curectRouterName: state => state.name
     }),
     selectedItems: {
       get () {
@@ -104,18 +89,10 @@ export default {
       set (item) {
         if (
           item !== undefined &&
-          this.$router.currentRoute.path !== this.links[item].allPath
+          this.$router.currentRoute.name !== this.links[item].share
         ) {
           this.$router.push(this.links[item].share)
         }
-      }
-    },
-    updateDrawer: {
-      get () {
-        return this.drawer
-      },
-      set (value) {
-        this.setDrawer(value)
       }
     }
   },
@@ -130,8 +107,7 @@ export default {
   methods: {
     randomNumber: function (value) {
       return Math.floor(Math.random() * (value - 1 + 1)) + 1
-    },
-    ...mapActions('appBar', ['setDrawer'])
+    }
   }
 }
 </script>

@@ -2,7 +2,8 @@
   <div>
     <app-card-full
       isAvatar
-      avatar="https://randomuser.me/api/portraits/women/34.jpg">
+      avatar="https://randomuser.me/api/portraits/women/34.jpg"
+    >
       <template v-slot:img>
         <v-img
           min-height="250px"
@@ -13,6 +14,7 @@
           transition="fade-transition"
           gradient="to top, rgba(0,0,0,.1), rgba(0,0,0,.7)"
         >
+        <tool-bar></tool-bar>
         </v-img>
       </template>
       <v-card-text class="text-center text--primary" style="padding-top:4px;">
@@ -24,16 +26,21 @@
 
       <article-content></article-content>
     </app-card-full>
+      <comments-page :articleId="articleId"></comments-page>
+
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
 
-import preLoder from '../components/ProgressCircular.vue'
+// import preLoder from '../components/ProgressCircular.vue'
 import AppCardFull from '../components/AppCardFull.vue'
+import CommentsLayout from '../components/CommentsLayout.vue'
+import ArticleShow from '../components/ArticleShow.vue'
+import ToolBar from '../components/ArticleToolBar.vue'
 
-const AsyncComponent = () => ({
+/* const AsyncComponent = () => ({
   component: new Promise(function (resolve, reject) {
     setTimeout(function () {
       resolve(import('../components/ArticleShow.vue'))
@@ -45,18 +52,20 @@ const AsyncComponent = () => ({
   },
   delay: 200,
   timeout: 5000
-})
+}) */
 
 export default {
   props: {
     articleId: {
       type: String,
-      default: ''
+      default: '2'
     }
   },
   components: {
-    'article-content': AsyncComponent,
-    'app-card-full': AppCardFull
+    'article-content': ArticleShow,
+    'app-card-full': AppCardFull,
+    'comments-page': CommentsLayout,
+    'tool-bar': ToolBar
   },
   data: () => ({
     loading: true
@@ -64,6 +73,7 @@ export default {
   computed: {},
   created: function () {
     // console.log(this.$store.state.appBar.contentBar)
+    // this.$router.push({ name: 'comments', params: { articleId: this.articleId } })
   },
   mounted: function () {
     // eslint-disable-next-line no-return-assign

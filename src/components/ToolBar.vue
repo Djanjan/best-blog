@@ -1,6 +1,6 @@
 <template>
   <div>
-      <template v-if="($vuetify.breakpoint.xs || $vuetify.breakpoint.sm) && (curectPath.split('/')[2] !== 'article')">
+      <template v-if="($vuetify.breakpoint.xs || $vuetify.breakpoint.sm) && (curectRouterName !== 'article')">
         <v-app-bar
           absolute
           transition="slide-y-transition"
@@ -20,8 +20,8 @@
 
           <v-spacer></v-spacer>
 
-          <login-button v-if="curectPath === '/app/home'"/>
-          <v-btn v-else icon @click.stop="$router.push('settings')">
+          <login-button v-if="curectRouterName === 'home'"/>
+          <v-btn v-else icon @click.stop="$router.push({ name: 'settings'})">
             <v-icon>mdi-cog</v-icon>
           </v-btn>
 
@@ -42,12 +42,12 @@
         </v-app-bar>
       </template>
 
-      <template v-else-if="(curectPath.split('/')[2] === 'article') && !$vuetify.breakpoint.lgAndUp">
+      <template v-else-if="((curectRouterName === 'article')||(curectRouterName === 'comments')) && !$vuetify.breakpoint.lgAndUp">
         <v-toolbar
             flat
             color="transparent"
             absolute
-            dark
+            :dark="curectRouterName === 'comments'? false : true"
             height="80px"
             width="100%"
           >
@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import { mapActions, mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 import menuContext from './MenuContext.vue'
 import preLoder from '../components/ProgressCircular.vue'
@@ -89,23 +89,12 @@ export default {
     'login-button': LoginButton
   },
   data: () => ({
-    loading: true,
-    curectPath: '/app/home'
+    loading: true
   }),
-  watch: {
-    '$route.params.search': {
-      handler: function () {
-        this.curectPath = this.$router.currentRoute.path
-      },
-      deep: true,
-      immediate: true
-    }
-  },
   computed: {
-    ...mapState('theme', {
-      appBarProp: state => state.appBar
+    ...mapState('router', {
+      curectRouterName: state => state.name
     }),
-    ...mapGetters('appBar', ['getContentBar']),
     selectedRouter: {
       get () {
         return this.$router.currentRoute.path
@@ -120,9 +109,6 @@ export default {
     setTimeout(() => (this.loading = false), 500)
   },
   methods: {
-    ...mapActions('appBar', [
-      'toggleDrawer'
-    ])
   }
 }
 

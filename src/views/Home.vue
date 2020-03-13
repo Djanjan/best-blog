@@ -1,5 +1,6 @@
 <template>
   <v-container fluid>
+    <tool-bar></tool-bar>
     <v-row>
       <v-col cols="12" md="12" lg="6">
           <v-row align="start" justify="space-between">
@@ -55,7 +56,21 @@
             v-for="n in 6"
             :key="n"
             cols="12" md="6">
-            <app-card-simple circleMin>
+            <app-card-simple
+              circleMin
+              :title="'Statistic '+n">
+              <v-list-item two-line class="text-right" style="padding-left: 110px;">
+        <v-list-item-content>
+          <v-list-item-title
+            class="subtitle-1 mb-1"
+            style="white-space: normal;"
+            >Landscape design</v-list-item-title
+          >
+          <v-list-item-subtitle class="subtitle-2" style="white-space: normal;"
+            >Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle
+          >
+        </v-list-item-content>
+      </v-list-item>
             </app-card-simple>
           </v-col>
         </app-layount>
@@ -72,6 +87,7 @@ import hfooter from '../components/Footer.vue'
 
 import AppCardSimple from '../components/AppCardSimple.vue'
 import AppLayout from '../components/AppLayout.vue'
+import toolBar from '../components/TheToolBarHome.vue'
 
 export default {
   name: 'Home',
@@ -81,7 +97,8 @@ export default {
     'app-card-simple': AppCardSimple,
     'app-card-category': () => import('../components/AppCardCategory.vue'),
     'app-layount': AppLayout,
-    hfooter
+    hfooter,
+    'tool-bar': toolBar
   },
   data: () => ({
     cards: '',

@@ -2,9 +2,9 @@
   <v-card-text style="padding: 0px">
     <div
       class="mb-1 headline"
-      :style="'white-space: normal; margin-left:' + (20 + circleSize) + 'px'"
+      :style="'white-space: normal; margin-left:' + ((circleMin ? 20 : 30) + circleSize) + 'px'"
     >
-      Landscape design
+      {{title}}
     </div>
 
     <v-card :class="customClass">
@@ -38,18 +38,7 @@
         </template>
       </div>
 
-      <v-list-item two-line class="text-right" style="padding-left: 110px;">
-        <v-list-item-content>
-          <v-list-item-title
-            class="subtitle-1 mb-1"
-            style="white-space: normal;"
-            >Landscape design</v-list-item-title
-          >
-          <v-list-item-subtitle class="subtitle-2" style="white-space: normal;"
-            >Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle
-          >
-        </v-list-item-content>
-      </v-list-item>
+      <slot></slot>
 
       <v-divider class="mx-4"></v-divider>
 
@@ -75,6 +64,10 @@ export default {
   name: 'app-card-simple',
   props: {
     customClass: {
+      type: String,
+      default: ''
+    },
+    title: {
       type: String,
       default: ''
     },

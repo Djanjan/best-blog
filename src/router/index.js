@@ -35,6 +35,12 @@ const routes = [
         component: () => import('../views/Article.vue')
       },
       {
+        path: 'article/:id/comments',
+        name: 'comments',
+        props: true,
+        component: () => import('../components/CommentsLayout.vue')
+      },
+      {
         path: 'about',
         name: 'about',
         component: () => import('../views/About.vue')
