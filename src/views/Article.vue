@@ -26,7 +26,7 @@
 
       <article-content></article-content>
     </app-card-full>
-      <comments-page :articleId="articleId"></comments-page>
+    <comments-page :id="id"></comments-page>
 
   </div>
 </template>
@@ -56,9 +56,9 @@ import ToolBar from '../components/ArticleToolBar.vue'
 
 export default {
   props: {
-    articleId: {
+    id: {
       type: String,
-      default: '2'
+      default: ''
     }
   },
   components: {

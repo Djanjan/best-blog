@@ -4,7 +4,7 @@
     <v-container fluid :class="customClass+($vuetify.breakpoint.mdAndUp ? 'px-10' : '')">
     <v-row align="center">
       <v-col>
-        <h2 class="font-weight-medium">Comments {{ articleId }}</h2>
+        <h2 class="font-weight-medium">Comments {{ id }}</h2>
       </v-col>
 
       <v-col>
@@ -30,12 +30,7 @@
             color="secondary"
             rounded
             large
-            @click.stop="
-              $router.push({
-                name: 'comments',
-                params: { articleId: articleId }
-              })
-            "
+            @click.stop="openCommentsPage()"
           >
             View All
           </v-btn>
@@ -55,11 +50,11 @@ import ToolBar from './CommentsToolBar.vue'
 export default {
   name: 'comments-layout',
   props: {
-    customClass: {
+    id: {
       type: String,
       default: ''
     },
-    articleId: {
+    customClass: {
       type: String,
       default: ''
     }
@@ -81,10 +76,10 @@ export default {
     // this.fetchData()
   },
   methods: {
-    toMovement: function () {
+    openCommentsPage: function () {
       this.$router.push({
-        path: '/view',
-        params: { id: this.movementId }
+        name: 'comments',
+        params: { id: this.id }
       })
     }
     /* fetchData() {

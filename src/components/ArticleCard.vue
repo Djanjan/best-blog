@@ -1,4 +1,5 @@
 <template>
+<div @click.stop="openArticlePage()">
     <card-full
         :custom-class="this.customClass"
         :isAvatar="this.isAvatar"
@@ -10,11 +11,10 @@
                 <v-img
                   min-height="150px"
                   max-height="250px"
-                  src="https://picsum.photos/500/300?random"
+                  :src="img"
                   lazy-src="https://picsum.photos/10/6?random"
                   :aspect-ratio="16/9"
                   transition="fade-transition"
-                  @click.stop="$router.push('article/1')"
                 >
                 </v-img>
               </template>
@@ -43,6 +43,7 @@
                 </v-row>
               </v-card-text>
     </card-full>
+</div>
 </template>
 
 <script>
@@ -51,6 +52,10 @@ import AppCardFull from './AppCardFull.vue'
 export default {
   name: 'ArticleCard',
   props: {
+    id: {
+      type: String,
+      default: ''
+    },
     customClass: {
       type: String,
       default: ''
@@ -78,6 +83,10 @@ export default {
     avatar: {
       type: String,
       default: ''
+    },
+    img: {
+      type: String,
+      default: 'https://picsum.photos/500/300?random'
     }
   },
   components: {
@@ -91,6 +100,16 @@ export default {
     // eslint-disable-next-line no-return-assign
     setTimeout(() => (this.loading = false), 1000)
     // this.loading = false
+  },
+  methods: {
+    openArticlePage: function () {
+      if (this.id !== '') {
+        this.$router.push({
+          name: 'article',
+          params: { id: this.id }
+        })
+      }
+    }
   }
 }
 </script>

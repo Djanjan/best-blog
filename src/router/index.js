@@ -30,8 +30,20 @@ const routes = [
         component: () => import('../views/Home.vue')
       },
       {
+        path: 'categories',
+        name: 'categories',
+        component: () => import('../views/Categories.vue')
+      },
+      {
+        path: 'categories/:id',
+        name: 'category',
+        props: true,
+        component: () => import('../views/Category.vue')
+      },
+      {
         path: 'article/:id',
         name: 'article',
+        props: true,
         component: () => import('../views/Article.vue')
       },
       {

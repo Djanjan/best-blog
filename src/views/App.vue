@@ -4,7 +4,7 @@
     <nav-panel-left />
 
     <v-content :class="!$vuetify.theme.dark ? 'background-lighten' : ''">
-      <v-container fluid :style="($vuetify.breakpoint.mdAndUp) ? 'padding: 0px 0px 0px 0px;' : 'padding: 0px 0px 0px 0px; margin: 0px 0px 40px 0px;'">
+      <v-container class="full-page" fluid :style="($vuetify.breakpoint.mdAndUp) ? 'padding: 0px 0px 0px 0px;' : 'padding: 0px 0px 0px 0px; margin: 0px 0px 40px 0px;'">
         <transition name="slide-fade" mode="out-in">
           <router-view></router-view>
         </transition>
@@ -61,6 +61,10 @@ export default {
 </script>
 
 <style scoped>
+.full-page{
+  min-height: 100vh;
+}
+
 .background-lighten {
   background-image: linear-gradient(
     to bottom,

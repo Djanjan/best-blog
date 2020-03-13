@@ -45,7 +45,7 @@ export default {
     toMovement: function () {
       this.$router.push({
         path: '/view',
-        params: { id: this.movementId }
+        params: { movementId: this.movementId }
       })
     }
   }

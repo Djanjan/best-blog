@@ -16,7 +16,8 @@
             <article-card
               title="Where to begin"
               sub-title="Indulgence contrasted sufficient to unpleasant in in insensible favourable.
-              In expression an solicitude principles in do. Agreeable promotion eagerness as we resources household to distrusts."></article-card>
+              In expression an solicitude principles in do. Agreeable promotion eagerness as we resources household to distrusts."
+              :id="n.toString()"></article-card>
             </v-skeleton-loader>
 
           </v-col>
@@ -29,6 +30,7 @@
               title="Where to begin"
               sub-title="Indulgence contrasted sufficient to unpleasant in in insensible favourable.
               In expression an solicitude principles in do. Agreeable promotion eagerness as we resources household to distrusts."
+              id="15"
             ></article-card>
           </v-col>
         </v-row>
@@ -42,8 +44,23 @@
             v-for="n in 6"
             :key="n"
             cols="12" md="6">
-            <app-card-category isHoverAndRipple>
-            </app-card-category>
+            <app-card-horizon isHoverAndRipple>
+              <template v-slot:img>
+                <v-img
+                  src="https://picsum.photos/500/300?random"
+                  lazy-src="https://picsum.photos/10/6?random"
+                  height="100%"
+                  width="100%"
+                >
+                </v-img>
+              </template>
+              <v-list-item two-line class="text-right">
+                <v-list-item-content>
+                    <v-list-item-title class="headline mb-1"  style="white-space: normal;">Landscape design</v-list-item-title>
+                    <v-list-item-subtitle style="white-space: normal;">Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
+                </v-list-item-content>
+            </v-list-item>
+            </app-card-horizon>
           </v-col>
         </app-layount>
       </v-col>
@@ -95,7 +112,7 @@ export default {
     // 'list': list,
     'article-card': () => import('../components/ArticleCard.vue'),
     'app-card-simple': AppCardSimple,
-    'app-card-category': () => import('../components/AppCardCategory.vue'),
+    'app-card-horizon': () => import('../components/AppCardHorizon.vue'),
     'app-layount': AppLayout,
     hfooter,
     'tool-bar': toolBar

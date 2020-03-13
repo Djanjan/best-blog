@@ -67,8 +67,8 @@ export default {
       {
         text: 'Category',
         icon: 'mdi-shape',
-        name: 'category',
-        path: '/app/category'
+        name: 'categories',
+        path: '/app/categories'
       },
       {
         text: 'Search',

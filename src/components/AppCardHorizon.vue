@@ -8,13 +8,7 @@
         <v-row no-gutters>
 
         <v-col cols="5">
-          <v-img
-            src="https://picsum.photos/500/300?random"
-            lazy-src="https://picsum.photos/10/6?random"
-            height="100%"
-            width="100%"
-          >
-          </v-img>
+          <slot name="img"></slot>
         </v-col>
 
        <v-col cols="1" class="d-flex justify-start align-center">
@@ -33,12 +27,7 @@
        </v-col>
 
         <v-col cols="6">
-            <v-list-item two-line class="text-right">
-                <v-list-item-content>
-                    <v-list-item-title class="headline mb-1"  style="white-space: normal;">Landscape design</v-list-item-title>
-                    <v-list-item-subtitle style="white-space: normal;">Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
-                </v-list-item-content>
-            </v-list-item>
+          <slot></slot>
         </v-col>
         </v-row>
     </v-card>
@@ -49,7 +38,7 @@
 import AppIcon from './AppIcon.vue'
 
 export default {
-  name: 'app-card-simple',
+  name: 'app-card-horizon',
   components: {
     'app-icon': AppIcon
   },
