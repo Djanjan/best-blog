@@ -1,6 +1,6 @@
 <template>
   <div>
-      <template v-if="$vuetify.breakpoint.xs || $vuetify.breakpoint.sm">
+      <template v-if="($vuetify.breakpoint.xs || $vuetify.breakpoint.sm) && (curectPath.split('/')[2] !== 'article')">
         <v-app-bar
           absolute
           transition="slide-y-transition"
@@ -40,6 +40,31 @@
             <v-icon>mdi-plus</v-icon>
           </v-btn>
         </v-app-bar>
+      </template>
+
+      <template v-else-if="(curectPath.split('/')[2] === 'article') && !$vuetify.breakpoint.lgAndUp">
+        <v-toolbar
+            flat
+            color="transparent"
+            absolute
+            dark
+            height="80px"
+            width="100%"
+          >
+            <v-btn icon class="ml-1" @click.stop="$router.go(-1)">
+              <v-icon>mdi-arrow-left</v-icon>
+            </v-btn>
+
+            <v-toolbar-title class="">JB</v-toolbar-title>
+
+            <v-spacer></v-spacer>
+
+            <v-toolbar-items class="mr-7 hidden-xs-and-down">
+              <v-btn dark text
+                ><v-icon left>mdi-tag-text-outline</v-icon>other</v-btn
+              >
+            </v-toolbar-items>
+          </v-toolbar>
       </template>
 
       <template v-else>

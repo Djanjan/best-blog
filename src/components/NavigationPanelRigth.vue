@@ -10,6 +10,7 @@
     color="transparent"
     :right="true"
     floating
+    v-if="(curectPath.split('/')[2] !== 'article') || $vuetify.breakpoint.lgAndUp"
   >
     <v-list-item>
       <login-button customClass="ma-6" v-if="curectPath === '/app/home'"/>
@@ -37,7 +38,7 @@ export default {
   },
   data: () => ({
     loading: true,
-    curectPath: '/app/home'
+    curectPath: 'article'
   }),
   watch: {
     '$route.params.search': {
@@ -49,7 +50,6 @@ export default {
     }
   },
   computed: {
-
   },
   created: function () {
     // console.log(this.$store.state.appBar.drawer)

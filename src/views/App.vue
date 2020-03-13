@@ -4,7 +4,7 @@
     <nav-panel-left />
 
     <v-content :class="!$vuetify.theme.dark ? 'background-lighten' : ''">
-      <v-container fluid :style="$vuetify.breakpoint.mdAndUp ? 'padding: 0px 0px 0px 0px;' : 'padding: 40px 0px 0px 0px; margin: 0px 0px 40px 0px;'">
+      <v-container fluid :style="($vuetify.breakpoint.mdAndUp) || (curectPath.split('/')[2] === 'article') ? 'padding: 0px 0px 0px 0px;' : 'padding: 40px 0px 0px 0px; margin: 0px 0px 40px 0px;'">
         <transition name="slide-fade" mode="out-in">
           <router-view></router-view>
         </transition>
@@ -33,7 +33,17 @@ export default {
     'tool-bar': toolBar
   },
   data: () => ({
+    curectPath: '/app/home'
   }),
+  watch: {
+    '$route.params.search': {
+      handler: function () {
+        this.curectPath = this.$router.currentRoute.path
+      },
+      deep: true,
+      immediate: true
+    }
+  },
   created: function () {
     // this.$router.push({ path: 'app/home' })
   },

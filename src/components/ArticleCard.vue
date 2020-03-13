@@ -4,6 +4,7 @@
         :isAvatar="this.isAvatar"
         :icon="this.icon"
         :avatar="this.avatar"
+        :isHoverAndRipple="true"
         >
               <template v-slot:img>
                 <v-img
@@ -13,6 +14,7 @@
                   lazy-src="https://picsum.photos/10/6?random"
                   :aspect-ratio="16/9"
                   transition="fade-transition"
+                  @click.stop="$router.push('article/1')"
                 >
                 </v-img>
               </template>

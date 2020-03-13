@@ -41,7 +41,7 @@
             v-for="n in 6"
             :key="n"
             cols="12" md="6">
-            <app-card-category>
+            <app-card-category isHoverAndRipple>
             </app-card-category>
           </v-col>
         </app-layount>

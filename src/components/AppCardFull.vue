@@ -2,9 +2,9 @@
     <v-hover
       v-slot:default="{ hover }">
     <v-card
-      :class="customClass+'a-link'"
-      :elevation="hover ? 20 : 2"
-      v-ripple="{ class: 'primary--text' }">
+      :class="customClass + (isHoverAndRipple ? 'a-link' : '')"
+      :elevation="applyHover(hover)"
+      :ripple="applyRipple()">
 
     <slot name="img"></slot>
 
@@ -64,6 +64,10 @@ export default {
     avatar: {
       type: String,
       default: ''
+    },
+    isHoverAndRipple: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
@@ -74,6 +78,22 @@ export default {
   },
   created: function () {
     // console.log(this.avatar)
+  },
+  methods: {
+    applyHover: function (hover) {
+      if (this.isHoverAndRipple) {
+        return hover ? 20 : 2
+      } else {
+        return ''
+      }
+    },
+    applyRipple: function () {
+      if (this.isHoverAndRipple) {
+        return { class: 'primary--text' }
+      } else {
+        return false
+      }
+    }
   }
 }
 </script>
