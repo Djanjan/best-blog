@@ -63,18 +63,18 @@ export default {
   data: () => ({
     loading: true,
     links: [
-      { text: 'Home', icon: 'mdi-home', share: 'home', allPath: '/app/home' },
+      { text: 'Home', icon: 'mdi-home', name: 'home', path: '/app/home' },
       {
         text: 'Category',
         icon: 'mdi-shape',
-        share: 'category',
-        allPath: '/app/category'
+        name: 'category',
+        path: '/app/category'
       },
       {
         text: 'Search',
         icon: 'mdi-magnify',
-        share: 'search',
-        allPath: '/app/search'
+        name: 'search',
+        path: '/app/search'
       }
     ]
   }),
@@ -89,9 +89,9 @@ export default {
       set (item) {
         if (
           item !== undefined &&
-          this.$router.currentRoute.name !== this.links[item].share
+          this.$router.currentRoute.name !== this.links[item].name
         ) {
-          this.$router.push(this.links[item].share)
+          this.$router.push(this.links[item].path)
         }
       }
     }
