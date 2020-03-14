@@ -26,7 +26,7 @@
             {{icon}}
           </v-icon>
 
-          <img v-else :src="avatar"/>
+          <img v-else :lazy-src="`https://picsum.photos/10/6?image=${3}`" :src="avatar"/>
         </v-avatar>
       </v-avatar>
     </div>
