@@ -35,6 +35,18 @@
             </v-list-item>
             </app-card-horizon>
           </v-col>
+          <v-col cols="12" md="12">
+            <v-row>
+            <v-col cols="12" md="12">
+              <v-pagination
+                  v-model="page"
+                  :length="30"
+                  :total-visible="$vuetify.breakpoint.mdAndUp ? 7 : 5"
+                  color="secondary"
+                ></v-pagination>
+            </v-col>
+          </v-row>
+          </v-col>
         </app-layout>
       </v-col>
     </v-row>
@@ -53,7 +65,9 @@ export default {
     'category-card': () => import('../components/CategoryCard.vue'),
     'tool-bar': toolBar
   },
-  data: () => ({}),
+  data: () => ({
+    page: 1
+  }),
   computed: {},
   created: function () {
     // console.log(this.avatar)
