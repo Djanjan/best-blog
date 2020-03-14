@@ -1,16 +1,27 @@
 <template>
-  <section style="height: 100vh;">
+  <section>
     <v-img
-      src="https://colorlib.com/preview/theme/cocoon/assets/img/bg/about.png"
+      src="@/assets/cat-what.gif"
       :lazy-src="`https://picsum.photos/10/6?image=${40}`"
       class="v-img-full"
       gradient="to top, rgba(0,0,0,.4), rgba(0,0,0,.7)"
     >
       <v-layout align-center justify-center style="height:100%;">
-        <v-row align="center" justify="center" style="position: absolute;">
-          <v-col align="center" justify="center" class="white--text">
-            <div class="display-4 font-weight-bold">404</div>
-            <div class="subtitle-2">Page Not Found :(</div>
+        <v-row align="center" justify="center">
+          <v-col cols="12" md="8" align="center" justify="center" class="white--text">
+            <div>
+              <div class="display-3 font-weight-bold text-center">Ohhh god what is it!</div>
+              <div class="subtitle-1 text-center mt-5">You are lost...</div>
+              <v-btn
+                class="mt-3"
+                color="secondary"
+                rounded
+                large
+                @click.stop="$router.push({ path: '/app/home' })"
+              >
+                Back to homepage
+              </v-btn>
+            </div>
           </v-col>
         </v-row>
       </v-layout>
