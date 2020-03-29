@@ -49,7 +49,7 @@ export default {
     },
     text: {
       type: String,
-      default: 'Greyhound divisely hello coldly fonwderfully'
+      default: ''
     }
   },
   components: {

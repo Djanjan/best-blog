@@ -3,7 +3,7 @@
     <tool-bar></tool-bar>
     <v-row>
       <v-col cols="12" lg="12">
-        <categories-all></categories-all>
+        <professions-all></professions-all>
       </v-col>
     </v-row>
     <v-alert dense type="error" class="alert-fix" :value="isError">
@@ -16,26 +16,17 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 import toolBar from '../components/TheToolBarHome.vue'
 
-// const PATH_IMG = 'http://rest.jobhunter.rest/public/uploads/'
-
 export default {
-  name: 'categories-page',
+  name: 'professions-page',
   components: {
-    'categories-all': () => import('./CategoriesAll.vue'),
+    'professions-all': () => import('./ProfessionsAll.vue'),
     'tool-bar': toolBar
   },
-  data () {
-    return {
-      loading: true,
-      error: '',
-      page: 1,
-      data: []
-    }
-  },
+  data: () => ({
+    error: ''
+  }),
   computed: {
     isError: function () {
       return this.error !== ''
@@ -45,28 +36,8 @@ export default {
     // console.log(this.avatar)
   },
   mounted: function () {
-    this.fetchData()
   },
   methods: {
-    fetchData: function () {
-      axios
-        .get('/categories', {
-          params: {
-            limit: 12,
-            page: 1
-          }
-        })
-        .then(response => {
-          this.data = response.data.data
-          // console.log(this.data)
-          this.loading = false
-        })
-        .catch(error => {
-          console.error(error)
-          this.error = error
-          this.loading = true
-        })
-    },
     toMovement: function () {
       this.$router.push({
         path: '/view',
@@ -79,14 +50,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.alert-fix {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  width: 90%;
-  z-index: 10;
-  transform: translateX(-50%);
-}
-</style>

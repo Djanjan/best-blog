@@ -36,9 +36,9 @@ const routes = [
       },
       {
         path: 'categories/:id',
-        name: 'category',
+        name: 'professions',
         props: true,
-        component: () => import('../views/Category.vue')
+        component: () => import('../views/Professions.vue')
       },
       {
         path: 'article/:id',
@@ -50,7 +50,7 @@ const routes = [
         path: 'article/:id/comments',
         name: 'comments',
         props: true,
-        component: () => import('../components/CommentsLayout.vue')
+        component: () => import('../views/Comments.vue')
       },
       {
         path: 'about',

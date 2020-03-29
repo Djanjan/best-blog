@@ -66,6 +66,10 @@
       </v-col>
 
       <v-col cols="12" lg="6">
+        <posts-all></posts-all>
+      </v-col>
+
+      <v-col cols="12" lg="6">
         <app-layount
           title="Statistic profession"
           movementId="134134">
@@ -99,6 +103,7 @@
 </template>
 
 <script>
+
 // import list from '../components/ListExpand.vue'
 import hfooter from '../components/Footer.vue'
 
@@ -113,6 +118,7 @@ export default {
     'article-card': () => import('../components/ArticleCard.vue'),
     'app-card-simple': AppCardSimple,
     'app-card-horizon': () => import('../components/AppCardHorizon.vue'),
+    'posts-all': () => import('./PostsAll.vue'),
     'app-layount': AppLayout,
     hfooter,
     'tool-bar': toolBar

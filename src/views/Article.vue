@@ -1,6 +1,8 @@
 <template>
   <div>
-    <app-card-full
+    <template v-if="!loading">
+      <div>
+        <app-card-full
       isAvatar
       avatar="https://randomuser.me/api/portraits/women/34.jpg"
     >
@@ -19,26 +21,23 @@
       </template>
       <v-card-text class="text-center text--primary" style="padding-top:4px;">
         <div class="pa-3 pb-4 font-weight-regular title secondary--text">
-          Mila Kabjert
+          Generator
         </div>
-        <div class="pb-3 font-weight-regular display-1">Where to design</div>
+        <div class="pb-3 font-weight-regular display-1">{{data.title}}</div>
       </v-card-text>
-
+      <div class="ma-5">{{data.body}}</div>
       <article-content></article-content>
     </app-card-full>
     <comments-page :id="id"></comments-page>
-
+      </div>
+    </template>
+    <template v-else>
+    </template>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-
-// import preLoder from '../components/ProgressCircular.vue'
-import AppCardFull from '../components/AppCardFull.vue'
-import CommentsLayout from '../components/CommentsLayout.vue'
-import ArticleShow from '../components/ArticleShow.vue'
-import ToolBar from '../components/ArticleToolBar.vue'
+import axios from 'axios'
 
 /* const AsyncComponent = () => ({
   component: new Promise(function (resolve, reject) {
@@ -55,6 +54,7 @@ import ToolBar from '../components/ArticleToolBar.vue'
 }) */
 
 export default {
+  name: 'article-page',
   props: {
     id: {
       type: String,
@@ -62,29 +62,42 @@ export default {
     }
   },
   components: {
-    'article-content': ArticleShow,
-    'app-card-full': AppCardFull,
-    'comments-page': CommentsLayout,
-    'tool-bar': ToolBar
+    'article-content': () => import('../components/ArticleShow.vue'),
+    'app-card-full': () => import('../components/AppCardFull.vue'),
+    'comments-page': () => import('./Comments.vue'),
+    'tool-bar': () => import('../components/ArticleToolBar.vue')
   },
   data: () => ({
-    loading: true
+    loading: true,
+    data: {}
   }),
-  computed: {},
+  computed: { },
   created: function () {
     // console.log(this.$store.state.appBar.contentBar)
     // this.$router.push({ name: 'comments', params: { articleId: this.articleId } })
   },
   mounted: function () {
-    // eslint-disable-next-line no-return-assign
-    setTimeout(() => (this.loading = false), 500)
-    // this.loading = false
+    this.fetchData()
   },
   beforeDestroy: function () {
     // this.toggleContentBar()
   },
   methods: {
-    ...mapActions('appBar', ['toggleDrawer'])
+    fetchData: function () {
+      this.loading = true
+      axios
+        .get('/posts/' + this.id)
+        .then(response => {
+          this.data = response.data.data
+          // console.log(this.data)
+          this.loading = false
+        })
+        .catch(error => {
+          console.error(error)
+          this.error = error
+          this.loading = true
+        })
+    }
   }
 }
 </script>
