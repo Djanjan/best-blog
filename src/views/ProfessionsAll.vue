@@ -36,6 +36,7 @@
 
 <script>
 import axios from 'axios'
+import { mapActions } from 'vuex'
 
 import AppLayout from '../components/AppLayout.vue'
 
@@ -48,7 +49,6 @@ export default {
   data () {
     return {
       loading: true,
-      error: '',
       page: 1,
       maxPage: 1,
       limitPage: 12,
@@ -56,9 +56,6 @@ export default {
     }
   },
   computed: {
-    isError: function () {
-      return this.error !== ''
-    },
     selectedPage: {
       get () {
         return this.page
@@ -95,10 +92,11 @@ export default {
         })
         .catch(error => {
           console.error(error)
-          this.error = error
+          this.newError(error)
           this.loading = true
         })
-    }
+    },
+    ...mapActions('error', [ 'newError' ])
     /* toMovement: function () {
       this.$router.push({
         path: '/view',

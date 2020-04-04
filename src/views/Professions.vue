@@ -6,12 +6,6 @@
         <professions-all></professions-all>
       </v-col>
     </v-row>
-    <v-alert dense type="error" class="alert-fix" :value="isError">
-      <strong> Connection failed.</strong> Try next time -- {{error}}
-      <v-btn icon color="white" right @click.stop="closeAlert()">
-        <v-icon>mdi-close</v-icon>
-      </v-btn>
-    </v-alert>
   </v-container>
 </template>
 
@@ -28,9 +22,6 @@ export default {
     error: ''
   }),
   computed: {
-    isError: function () {
-      return this.error !== ''
-    }
   },
   created: function () {
     // console.log(this.avatar)
@@ -43,9 +34,6 @@ export default {
         path: '/view',
         params: { id: this.movementId }
       })
-    },
-    closeAlert: function () {
-      this.error = ''
     }
   }
 }

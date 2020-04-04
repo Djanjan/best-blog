@@ -34,11 +34,12 @@
 
 <script>
 import axios from 'axios'
+import { mapActions } from 'vuex'
 
 import AppLayout from '../components/AppLayout.vue'
 
 export default {
-  name: 'posts-all-page',
+  name: 'article-all-page',
   components: {
     'app-layout': AppLayout,
     'article-card': () => import('../components/ArticleCard.vue')
@@ -93,10 +94,11 @@ export default {
         })
         .catch(error => {
           console.error(error)
-          this.error = error
+          this.newError(error)
           this.loading = true
         })
-    }
+    },
+    ...mapActions('error', [ 'newError' ])
     /* toMovement: function () {
       this.$router.push({
         path: '/view',

@@ -53,13 +53,22 @@
         </v-btn>
       </v-bottom-navigation>
     </template>
+
+    <app-error></app-error>
+
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 
+import AppError from './AppError.vue'
+
 export default {
+  name: 'the-navigation-panel',
+  components: {
+    'app-error': AppError
+  },
   data: () => ({
     loading: true,
     links: [

@@ -6,17 +6,12 @@
         <categories-all></categories-all>
       </v-col>
     </v-row>
-    <v-alert dense type="error" class="alert-fix" :value="isError">
-      <strong> Connection failed.</strong> Try next time -- {{error}}
-      <v-btn icon color="white" right @click.stop="closeAlert()">
-        <v-icon>mdi-close</v-icon>
-      </v-btn>
-    </v-alert>
   </v-container>
 </template>
 
 <script>
 import axios from 'axios'
+import { mapActions } from 'vuex'
 
 import toolBar from '../components/TheToolBarHome.vue'
 
@@ -31,15 +26,11 @@ export default {
   data () {
     return {
       loading: true,
-      error: '',
       page: 1,
       data: []
     }
   },
   computed: {
-    isError: function () {
-      return this.error !== ''
-    }
   },
   created: function () {
     // console.log(this.avatar)
@@ -63,7 +54,7 @@ export default {
         })
         .catch(error => {
           console.error(error)
-          this.error = error
+          this.newError(error)
           this.loading = true
         })
     },
@@ -73,9 +64,7 @@ export default {
         params: { id: this.movementId }
       })
     },
-    closeAlert: function () {
-      this.error = ''
-    }
+    ...mapActions('error', [ 'newError' ])
   }
 }
 </script>

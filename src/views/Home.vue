@@ -118,7 +118,7 @@ export default {
     'article-card': () => import('../components/ArticleCard.vue'),
     'app-card-simple': AppCardSimple,
     'app-card-horizon': () => import('../components/AppCardHorizon.vue'),
-    'posts-all': () => import('./PostsAll.vue'),
+    'posts-all': () => import('./ArticleAll.vue'),
     'app-layount': AppLayout,
     hfooter,
     'tool-bar': toolBar
