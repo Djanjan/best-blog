@@ -38,10 +38,13 @@
 import axios from 'axios'
 import { mapActions } from 'vuex'
 
+import pagination from '../mixins/pagination.js'
+
 import AppLayout from '../components/AppLayout.vue'
 
 export default {
   name: 'categories-all-page',
+  mixins: [pagination],
   components: {
     'app-layout': AppLayout,
     'category-card': () => import('../components/CategoryCard.vue')
@@ -49,24 +52,10 @@ export default {
   data () {
     return {
       loading: true,
-      page: 1,
-      maxPage: 1,
-      limitPage: 12,
       data: []
     }
   },
   computed: {
-    selectedPage: {
-      get () {
-        return this.page
-      },
-      set (item) {
-        if (item !== this.page) {
-          this.page = item
-          this.fetchData(item)
-        }
-      }
-    }
   },
   created: function () {
     // console.log(this.avatar)

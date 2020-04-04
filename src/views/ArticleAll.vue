@@ -36,10 +36,13 @@
 import axios from 'axios'
 import { mapActions } from 'vuex'
 
+import pagination from '../mixins/pagination.js'
+
 import AppLayout from '../components/AppLayout.vue'
 
 export default {
   name: 'article-all-page',
+  mixins: [pagination],
   components: {
     'app-layout': AppLayout,
     'article-card': () => import('../components/ArticleCard.vue')
@@ -47,28 +50,10 @@ export default {
   data () {
     return {
       loading: true,
-      error: '',
-      page: 1,
-      maxPage: 1,
-      limitPage: 6,
       data: []
     }
   },
   computed: {
-    isError: function () {
-      return this.error !== ''
-    },
-    selectedPage: {
-      get () {
-        return this.page
-      },
-      set (item) {
-        if (item !== this.page) {
-          this.page = item
-          this.fetchData(item)
-        }
-      }
-    }
   },
   created: function () {
     // console.log(this.avatar)
