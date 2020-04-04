@@ -1,5 +1,5 @@
 <template>
-  <app-layout title="All Professions">
+  <app-layout title="Professions select specialization">
     <!--<template v-if="loading">
       <v-col v-for="(n, index) in limitPage" :key="index" cols="12" md="6">
         <v-skeleton-loader

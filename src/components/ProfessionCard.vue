@@ -62,12 +62,12 @@ export default {
   data: () => ({}),
   methods: {
     openProfessionPage: function () {
-      /* if (this.id !== '') {
+      if (this.id !== '') {
         this.$router.push({
-          name: 'professions',
+          name: 'profession',
           params: { id: this.id }
         })
-      } */
+      }
     }
   }
 }

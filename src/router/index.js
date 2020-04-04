@@ -41,6 +41,12 @@ const routes = [
         component: () => import('../views/Professions.vue')
       },
       {
+        path: 'profession/:id',
+        name: 'profession',
+        props: true,
+        component: () => import('../views/Profession.vue')
+      },
+      {
         path: 'article/:id',
         name: 'article',
         props: true,
