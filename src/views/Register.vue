@@ -269,6 +269,7 @@
 import { mapActions } from 'vuex'
 import { validationMixin } from 'vuelidate'
 import { required, maxLength, email } from 'vuelidate/lib/validators'
+import axios from 'axios'
 
 // import hfooter from '../components/Footer.vue'
 
@@ -294,7 +295,8 @@ export default {
     name: '',
     email: '',
     password: '',
-    checkbox: false
+    checkbox: false,
+    data: {}
   }),
   computed: {
     checkboxErrors () {
@@ -344,7 +346,9 @@ export default {
         this.submitStatus = 'ERROR'
       } else {
         this.submitStatus = 'PENDING'
-        setTimeout(() => {
+
+        this.fetchData()
+        /* setTimeout(() => {
           this.authorization({
             login: this.name,
             email: this.email,
@@ -355,7 +359,7 @@ export default {
               '.jpg'
           })
           this.submitStatus = 'OK'
-        }, 500)
+        }, 500) */
       }
     },
     clear () {
@@ -365,8 +369,40 @@ export default {
       this.password = ''
       this.checkbox = false
     },
+    fetchData: function () {
+      this.loading = true
+      axios
+        .post('/register', {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+          confirm_password: this.password,
+          featured_img: 'http://rest.jobhunter.rest/public/files/uploads/'
+        })
+        .then(response => {
+          this.data = response.data.data
+          console.log(response.data.data)
+          this.authorization({
+            id: this.data.id,
+            login: this.data.name,
+            email: this.data.email,
+            avatar: this.data.featured_img,
+            token: this.data.token
+          })
+          this.submitStatus = 'OK'
+          this.closePage()
+          this.loading = false
+        })
+        .catch(error => {
+          console.error(error)
+          this.newError(error)
+          this.loading = true
+        })
+    },
     closePage () {
-      this.$router.go(-1)
+      this.$router.push({
+        name: 'home'
+      })
     }
   }
 }

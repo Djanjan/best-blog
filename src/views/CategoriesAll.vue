@@ -1,11 +1,11 @@
 <template>
   <app-layout title="All Category">
     <!--<template v-if="loading">
-      <v-col v-for="(n, index) in limitPage" :key="index" cols="12" md="6">
+      <v-col v-for="(n, index) in limitPage" :key="index" cols="16" md="4">
         <v-skeleton-loader
           v-if="loading"
           transition="scale-transition"
-          type="card"
+          type="image"
         ></v-skeleton-loader>
       </v-col>
     </template>-->
@@ -19,6 +19,7 @@
       >
       </category-card>
     </v-col>
+
     <v-col cols="12" md="12">
       <v-row>
         <v-col cols="12" md="12">

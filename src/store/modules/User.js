@@ -3,10 +3,12 @@ export default {
   state: {
     logged: false,
     date: {
+      id: null,
       login: null,
       password: null,
       email: null,
-      avatar: null
+      avatar: null,
+      token: null
     }
 
   },
@@ -20,10 +22,12 @@ export default {
       state.logged = !state.logged
     },
     Authorization (state, value) {
+      state.date.id = value.id
       state.date.login = value.login
       state.date.email = value.email
       state.date.password = value.password
       state.date.avatar = value.avatar
+      state.date.token = value.token
       state.logged = true
     },
     Logout (state) {
