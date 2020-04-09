@@ -25,8 +25,8 @@
         </div>
         <div class="pb-3 font-weight-regular display-1">{{data.title}}</div>
       </v-card-text>
-      <div class="ma-5">{{data.body}}</div>
-      <article-content></article-content>
+      <!--<div class="ma-5">{{data.body}}</div>-->
+      <article-content :html="data.body"></article-content>
     </app-card-full>
     <comments-page :id="id"></comments-page>
       </div>
