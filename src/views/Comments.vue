@@ -1,83 +1,64 @@
 <template>
-<div>
-  <template v-if="curectRouterName === 'comments'">
-    <div>
+  <div>
     <tool-bar></tool-bar>
-    <v-container fluid :class="customClass+($vuetify.breakpoint.mdAndUp ? 'px-10' : '')">
-    <v-row align="center">
-      <v-col>
-        <h2 class="font-weight-medium">Comments {{ data.length }}</h2>
-      </v-col>
+    <v-container
+      fluid
+      :class="customClass + ($vuetify.breakpoint.mdAndUp ? 'px-10' : '')"
+    >
+      <v-row align="center">
+        <v-col>
+          <h2 class="font-weight-medium">Comments {{ data.length }}</h2>
+        </v-col>
 
-      <v-col>
-        <h4 class="text-right font-weight-medium">Write</h4>
-      </v-col>
-    </v-row>
-
-    <v-row align="start" justify="space-between">
-      <v-col cols="12" lg="12" v-for="item in data" :key="item.id">
-        <comment-card
-          :text="item.title"></comment-card>
-      </v-col>
-      <v-col cols="12" md="12">
-      <v-row>
-        <v-col cols="12" md="12">
-          <v-pagination
-            v-model="selectedPage"
-            :length="maxPage"
-            :total-visible="$vuetify.breakpoint.mdAndUp ? 7 : 5"
-            color="secondary"
-          ></v-pagination>
+        <v-col>
+          <h4 class="text-right font-weight-medium">Write</h4>
         </v-col>
       </v-row>
-    </v-col>
-    </v-row>
-    </v-container>
-    </div>
-  </template>
-  <template v-else>
-    <div>
-    <tool-bar></tool-bar>
-    <v-container fluid :class="customClass+($vuetify.breakpoint.mdAndUp ? 'px-10' : '')">
-    <v-row align="center">
-      <v-col>
-        <h2 class="font-weight-medium">Comments {{ data.length }}</h2>
-      </v-col>
 
-      <v-col>
-        <h4 class="text-right font-weight-medium">Write</h4>
-      </v-col>
-    </v-row>
-
-    <v-row align="start" justify="space-between">
-      <v-col cols="12" lg="12" v-for="item in data" :key="item.id">
-        <comment-card
-          :text="item.title"></comment-card>
-      </v-col>
-      <v-col cols="12" lg="12">
-        <v-card-actions
-          class="justify-center"
-          v-if="curectRouterName === 'article'">
-          <v-btn
-            color="secondary"
-            rounded
-            large
-            @click.stop="openCommentsPage()"
-          >
-            View All
-          </v-btn>
-        </v-card-actions>
-      </v-col>
-    </v-row>
+      <v-row align="start" justify="space-between">
+        <v-col cols="12" lg="12" v-for="item in data" :key="item.id">
+          <comment-card
+            :text="item.title"
+            :userId="item.user_id"
+          ></comment-card>
+        </v-col>
+        <v-col cols="12" md="12">
+          <template v-if="curectRouterName === 'comments'">
+            <v-row>
+              <v-col cols="12" md="12">
+                <v-pagination
+                  v-model="selectedPage"
+                  :length="maxPage"
+                  :total-visible="$vuetify.breakpoint.mdAndUp ? 7 : 5"
+                  color="secondary"
+                ></v-pagination>
+              </v-col>
+            </v-row>
+          </template>
+          <template v-else>
+            <v-card-actions
+              class="justify-center"
+              v-if="data.length >= this.limitMinPage"
+            >
+              <v-btn
+                color="secondary"
+                rounded
+                large
+                @click.stop="openCommentsPage()"
+              >
+                View All
+              </v-btn>
+            </v-card-actions>
+          </template>
+        </v-col>
+      </v-row>
     </v-container>
-    </div>
-  </template>
-</div>
+  </div>
 </template>
 
 <script>
 import axios from 'axios'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'comments-page',
@@ -100,6 +81,7 @@ export default {
     loading: true,
     page: 1,
     maxPage: 1,
+    limitMinPage: 4,
     data: {}
   }),
   computed: {
@@ -118,7 +100,7 @@ export default {
       }
     },
     limitPage: function () {
-      return this.curectRouterName === 'comments' ? 12 : 4
+      return this.curectRouterName === 'comments' ? 12 : this.limitMinPage
     }
   },
   created: function () {
@@ -129,6 +111,7 @@ export default {
     this.fetchData(this.page)
   },
   methods: {
+    ...mapActions('error', ['newError']),
     openCommentsPage: function () {
       this.$router.push({
         name: 'comments',
@@ -152,7 +135,7 @@ export default {
         })
         .catch(error => {
           console.error(error)
-          this.error = error
+          this.newError(error)
           this.loading = true
         })
     }

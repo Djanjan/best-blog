@@ -21,7 +21,7 @@
       </template>
       <v-card-text class="text-center text--primary" style="padding-top:4px;">
         <div class="pa-3 pb-4 font-weight-regular title secondary--text">
-          Generator
+          {{dataUser.name}}
         </div>
         <div class="pb-3 font-weight-regular display-1">{{data.title}}</div>
       </v-card-text>
@@ -32,12 +32,19 @@
       </div>
     </template>
     <template v-else>
+      <v-skeleton-loader
+          transition="scale-transition"
+          type="card"
+          width="100%"
+          height="100%">
+      </v-skeleton-loader>
     </template>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import { mapActions } from 'vuex'
 
 /* const AsyncComponent = () => ({
   component: new Promise(function (resolve, reject) {
@@ -69,6 +76,7 @@ export default {
   },
   data: () => ({
     loading: true,
+    dataUser: {},
     data: {}
   }),
   computed: { },
@@ -83,6 +91,7 @@ export default {
     // this.toggleContentBar()
   },
   methods: {
+    ...mapActions('error', [ 'newError' ]),
     fetchData: function () {
       this.loading = true
       axios
@@ -90,11 +99,25 @@ export default {
         .then(response => {
           this.data = response.data.data
           // console.log(this.data)
+          this.fetchUserData()
+        })
+        .catch(error => {
+          console.error(error)
+          this.newError(error)
+          this.loading = true
+        })
+    },
+    fetchUserData: function () {
+      axios
+        .get('/user/' + this.data.user_id)
+        .then(response => {
+          this.dataUser = response.data.data
+          // console.log(this.data)
           this.loading = false
         })
         .catch(error => {
           console.error(error)
-          this.error = error
+          this.newError(error)
           this.loading = true
         })
     }
