@@ -77,6 +77,35 @@
         >
           <v-row justify="space-around">
             <v-col>
+              <span>Tertiary</span>
+              <v-chip-group
+                column
+                active-class="tertiary--text"
+                v-model="selectedColorTertiary"
+              >
+                <v-chip
+                  v-for="(color, i) in colors"
+                  :key="i"
+                  :color="color.cod"
+                  filter
+                  outlined
+                >
+                  {{ color.name }}
+                </v-chip>
+              </v-chip-group>
+            </v-col>
+          </v-row>
+        </v-skeleton-loader>
+
+        <v-divider></v-divider>
+
+        <v-skeleton-loader
+          :loading="loading"
+          transition="scale-transition"
+          type="list-item-three-line"
+        >
+          <v-row justify="space-around">
+            <v-col>
               <span>Mode Dark</span>
               <v-switch v-model="selectedMode" color="primary"> </v-switch>
             </v-col>
@@ -274,6 +303,17 @@ export default {
         if (item !== undefined) {
           this.$vuetify.theme.themes.light.secondary = this.colors[item].cod
           this.$vuetify.theme.themes.dark.secondary = this.colors[item].cod
+        }
+      }
+    },
+    selectedColorTertiary: {
+      get () {
+        return this.value
+      },
+      set (item) {
+        if (item !== undefined) {
+          this.$vuetify.theme.themes.light.tertiary = this.colors[item].cod
+          this.$vuetify.theme.themes.dark.tertiary = this.colors[item].cod
         }
       }
     },
