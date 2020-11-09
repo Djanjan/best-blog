@@ -2,16 +2,20 @@
   <v-card-text style="padding: 0px">
     <div
       class="mb-1 headline"
-      :style="'white-space: normal; margin-left:' + ((circleMin ? 20 : 30) + circleSize) + 'px'"
+      :style="
+        'white-space: normal; margin-left:' +
+          ((circleMin ? 20 : 30) + circleSize) +
+          'px'
+      "
     >
-      {{title}}
+      {{ title }}
     </div>
 
     <v-card :class="customClass">
       <div style="height: 0px;">
         <template v-if="!circleMin">
           <v-avatar
-            :color="$vuetify.theme.dark ? '#424242' : 'white'"
+            :color="$vuetify.theme.dark ? 'transparent' : 'white'"
             :size="circleSize + 10"
             :style="'top:' + -(circleSize / 2 + 6) + 'px ; left:15px'"
           >
@@ -61,19 +65,19 @@
 
 <script>
 export default {
-  name: 'app-card-simple',
+  name: "app-card-simple",
   props: {
     customClass: {
       type: String,
-      default: ''
+      default: ""
     },
     title: {
       type: String,
-      default: ''
+      default: ""
     },
     circleColor: {
       type: String,
-      default: 'secondary'
+      default: "secondary"
     },
     circleSize: {
       type: Number,
@@ -89,13 +93,13 @@ export default {
     },
     icon: {
       type: String,
-      default: 'mdi-account-tie'
+      default: "mdi-account-tie"
     },
     avatar: {
       type: String,
-      default: ''
+      default: ""
     }
   },
   data: () => ({})
-}
+};
 </script>

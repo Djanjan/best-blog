@@ -33,34 +33,34 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 
-import LoginButton from '../components/LoginButton.vue'
+import LoginButton from "../components/LoginButton.vue";
 
 export default {
   components: {
-    'login-button': LoginButton
+    "login-button": LoginButton
   },
   data: () => ({
     loading: true
   }),
   computed: {
-    ...mapState('router', {
+    ...mapState("router", {
       curectRouterName: state => state.name
     })
   },
-  created: function () {
+  created: function() {
     // console.log(this.$store.state.appBar.drawer)
   },
-  mounted: function () {
+  mounted: function() {
     // eslint-disable-next-line no-return-assign
-    setTimeout(() => (this.loading = false), 500)
+    setTimeout(() => (this.loading = false), 500);
     // this.loading = false
   },
   methods: {
-    randomNumber: function (value) {
-      return Math.floor(Math.random() * (value - 1 + 1)) + 1
+    randomNumber: function(value) {
+      return Math.floor(Math.random() * (value - 1 + 1)) + 1;
     }
   }
-}
+};
 </script>

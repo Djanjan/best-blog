@@ -1,95 +1,95 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'start-page',
-    component: () => import('../views/Start.vue')
+    path: "/",
+    name: "start-page",
+    component: () => import("../views/Start.vue")
   },
   {
-    path: '/login',
-    name: 'login',
-    component: () => import('../views/Login.vue')
+    path: "/login",
+    name: "login",
+    component: () => import("../views/Login.vue")
   },
   {
-    path: '/register',
-    name: 'register',
-    component: () => import('../views/Register.vue')
+    path: "/register",
+    name: "register",
+    component: () => import("../views/Register.vue")
   },
   {
-    path: '/app',
-    name: 'app',
-    component: () => import('../views/App.vue'),
+    path: "/app",
+    name: "app",
+    component: () => import("../views/App.vue"),
     children: [
       {
-        path: 'home',
-        name: 'home',
-        component: () => import('../views/Home.vue')
+        path: "home",
+        name: "home",
+        component: () => import("../views/Home.vue")
       },
       {
-        path: 'categories',
-        name: 'categories',
-        component: () => import('../views/Categories.vue')
+        path: "categories",
+        name: "categories",
+        component: () => import("../views/Categories.vue")
       },
       {
-        path: 'categories/:id',
-        name: 'professions',
+        path: "professions",
+        name: "professions",
         props: true,
-        component: () => import('../views/Professions.vue')
+        component: () => import("../views/Professions.vue")
       },
       {
-        path: 'profession/:id',
-        name: 'profession',
+        path: "profession/:id",
+        name: "profession",
         props: true,
-        component: () => import('../views/Profession.vue')
+        component: () => import("../views/Profession.vue")
       },
       {
-        path: 'article/:id',
-        name: 'article',
+        path: "article/:id",
+        name: "article",
         props: true,
-        component: () => import('../views/Article.vue')
+        component: () => import("../views/Article.vue")
       },
       {
-        path: 'article/:id/comments',
-        name: 'comments',
+        path: "article/:id/comments",
+        name: "comments",
         props: true,
-        component: () => import('../views/Comments.vue')
+        component: () => import("../views/Comments.vue")
       },
       {
-        path: 'about',
-        name: 'about',
-        component: () => import('../views/About.vue')
+        path: "about",
+        name: "about",
+        component: () => import("../views/About.vue")
       },
       {
-        path: 'editor',
-        name: 'editor',
-        component: () => import('../views/Editor.vue')
+        path: "editor",
+        name: "editor",
+        component: () => import("../views/Editor.vue")
       },
       {
-        path: 'settings',
-        name: 'settings',
-        component: () => import('../views/Settings.vue')
+        path: "settings",
+        name: "settings",
+        component: () => import("../views/Settings.vue")
       },
       {
-        path: '*',
-        name: 'app-not-found',
-        component: () => import('../views/AppNotFound.vue')
+        path: "*",
+        name: "app-not-found",
+        component: () => import("../views/AppNotFound.vue")
       }
     ]
   },
   {
-    path: '*',
-    name: 'not-found',
-    component: () => import('../views/NotFound.vue')
+    path: "*",
+    name: "not-found",
+    component: () => import("../views/NotFound.vue")
   }
-]
+];
 
 const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
-})
+});
 
-export default router
+export default router;

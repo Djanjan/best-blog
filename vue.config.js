@@ -1,11 +1,7 @@
 module.exports = {
-  'transpileDependencies': [
-    'vuetify'
-  ],
+  transpileDependencies: ["vuetify"],
 
-  publicPath: process.env.NODE_ENV === 'production'
-    ? '/best-blog/'
-    : '',
+  publicPath: process.env.NODE_ENV === "production" ? "/best-blog/" : "",
 
   lintOnSave: false,
   runtimeCompiler: true,
@@ -18,4 +14,4 @@ module.exports = {
       }
     }
   }
-}
+};

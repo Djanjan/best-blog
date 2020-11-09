@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 
 export default {
   components: {},
@@ -25,19 +25,19 @@ export default {
     loading: true
   }),
   computed: {
-    ...mapState('router', {
+    ...mapState("router", {
       curectRouterName: state => state.name
     })
   },
-  created: function () {
+  created: function() {
     // console.log(this.$router.currentRoute.path)
   },
-  mounted: function () {
+  mounted: function() {
     // eslint-disable-next-line no-return-assign
-    setTimeout(() => (this.loading = false), 500)
+    setTimeout(() => (this.loading = false), 500);
   },
   methods: {}
-}
+};
 </script>
 
 <style lang="scss"></style>

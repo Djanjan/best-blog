@@ -1,24 +1,27 @@
 <template>
-  <app-layout title="Professions select specialization">
-    <!--<template v-if="loading">
-      <v-col v-for="(n, index) in limitPage" :key="index" cols="12" md="6">
+  <app-layout title="Professions all">
+    <template v-if="loading">
+      <v-col v-for="(n, index) in limitPage" :key="index" cols="12" md="4">
         <v-skeleton-loader
-          v-if="loading"
+          v-bind="{ boilerplate: true, elevation: 2 }"
           transition="scale-transition"
-          type="card"
+          type="card-avatar"
+          height="100px"
         ></v-skeleton-loader>
       </v-col>
-    </template>-->
+    </template>
 
-    <v-col v-for="item in data" :key="item.id" cols="12" md="6">
-      <profession-card
-        isHoverAndRipple
-        :title="item.title"
-        :subTitle="item.body"
-        :id="item.id.toString()"
-      >
-      </profession-card>
-    </v-col>
+    <template v-else>
+      <v-col v-for="item in data" :key="item.id" cols="12" md="4">
+        <profession-card
+          isHoverAndRipple
+          :title="item.title"
+          :subTitle="item.description"
+          :id="item._id"
+        >
+        </profession-card>
+      </v-col>
+    </template>
     <v-col cols="12" md="12">
       <v-row>
         <v-col cols="12" md="12">
@@ -35,57 +38,61 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { mapActions } from 'vuex'
+import axios from "axios";
+import { mapActions } from "vuex";
 
-import pagination from '../mixins/pagination.js'
-
-import AppLayout from '../components/AppLayout.vue'
+import pagination from "../mixins/pagination.js";
 
 export default {
-  name: 'professions-all-page',
+  name: "professions-all-page",
   mixins: [pagination],
   components: {
-    'app-layout': AppLayout,
-    'profession-card': () => import('../components/ProfessionCard.vue')
+    "app-layout": () => import("../components/AppLayout.vue"),
+    "profession-card": () => import("../components/ProfessionCard.vue")
   },
-  data () {
+  props: {
+    limitPage: {
+      type: Number,
+      default: 12
+    }
+  },
+  data() {
     return {
       loading: true,
       data: []
-    }
+    };
   },
-  computed: {
-  },
-  created: function () {
+  computed: {},
+  created: function() {
     // console.log(this.avatar)
   },
-  mounted: function () {
-    this.fetchData(this.page)
+  mounted: function() {
+    //console.log(this.$router.currentRoute);
+    this.fetchData(this.page);
   },
   methods: {
-    fetchData: function (page) {
-      this.loading = true
+    fetchData: function(page) {
+      this.loading = true;
       axios
-        .get('/professions/categories/' + this.$router.currentRoute.params.id, {
+        .get("/professions", {
           params: {
             limit: this.limitPage,
             page: page
           }
         })
         .then(response => {
-          this.data = response.data.data.data
-          this.maxPage = response.data.data.last_page
-          // console.log(response.data.data)
-          this.loading = false
+          this.data = response.data.data;
+          this.maxPage = response.data.maxPage;
+          //console.log(response.data);
+          this.loading = false;
         })
         .catch(error => {
-          console.error(error)
-          this.newError(error)
-          this.loading = true
-        })
+          console.error(error);
+          this.newError(error);
+          this.loading = true;
+        });
     },
-    ...mapActions('error', [ 'newError' ])
+    ...mapActions("error", ["newError"])
     /* toMovement: function () {
       this.$router.push({
         path: '/view',
@@ -93,5 +100,5 @@ export default {
       })
     }, */
   }
-}
+};
 </script>

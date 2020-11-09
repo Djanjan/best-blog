@@ -1,41 +1,47 @@
 <template>
   <div>
-
     <nav-panel-left />
 
-    <v-content :class="!$vuetify.theme.dark ? 'background-lighten' : ''">
-      <v-container class="full-page" fluid :style="($vuetify.breakpoint.mdAndUp) ? 'padding: 0px 0px 0px 0px;' : 'padding: 0px 0px 0px 0px; margin: 0px 0px 40px 0px;'">
+    <v-main>
+      <v-container
+        class="full-page"
+        fluid
+        :style="
+          $vuetify.breakpoint.mdAndUp
+            ? 'padding: 0px 0px 0px 0px;'
+            : 'padding: 0px 0px 0px 0px; margin: 0px 0px 40px 0px;'
+        "
+      >
         <transition name="slide-fade" mode="out-in">
           <router-view></router-view>
         </transition>
       </v-container>
-    </v-content>
+    </v-main>
 
-    <nav-panel-rigth/>
-
+    <nav-panel-rigth />
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+// :class="!$vuetify.theme.dark ? 'background-lighten' : ''"
+import { mapState, mapActions } from "vuex";
 
-import navigationPanelLeft from '../components/TheNavigationPanel.vue'
-import navigationPanelRigth from '../components/TheNavigationPanelRigth.vue'
+import navigationPanelLeft from "../components/TheNavigationPanel.vue";
+import navigationPanelRigth from "../components/TheNavigationPanelRigth.vue";
 
 export default {
   props: {
     source: String
   },
   components: {
-    'nav-panel-left': navigationPanelLeft,
-    'nav-panel-rigth': navigationPanelRigth
+    "nav-panel-left": navigationPanelLeft,
+    "nav-panel-rigth": navigationPanelRigth
   },
-  data: () => ({
-  }),
+  data: () => ({}),
   watch: {
-    '$route.params.search': {
-      handler: function () {
-        this.setRouter({ name: this.$router.currentRoute.name })
+    "$route.params.search": {
+      handler: function() {
+        this.setRouter({ name: this.$router.currentRoute.name });
         // this.curectPath = this.$router.currentRoute.path
         // console.log(this.curectRouterName)
       },
@@ -43,41 +49,41 @@ export default {
       immediate: true
     }
   },
-  created: function () {
+  created: function() {
     // this.$router.push({ path: 'app/home' })
   },
   computed: {
-    ...mapState('router', {
+    ...mapState("router", {
       curectRouterName: state => state.name
     }),
-    theme () {
-      return this.$vuetify.theme.dark ? 'dark' : 'light' // :style="{background: $vuetify.theme.themes[theme].background}"
+    theme() {
+      return this.$vuetify.theme.dark ? "dark" : "light"; // :style="{background: $vuetify.theme.themes[theme].background}"
     }
   },
   methods: {
-    ...mapActions('router', ['setRouter'])
+    ...mapActions("router", ["setRouter"])
   }
-}
+};
 </script>
 
 <style scoped>
-.full-page{
+.full-page {
   min-height: 100vh;
 }
 
-.background-lighten {
+/*.background-lighten {
   background-image: linear-gradient(
     to bottom,
     var(--v-primary-base) 0%,
     var(--v-tertiary-base) 100%
   );
-}
+}*/
 
 .slide-fade-enter-active {
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 .slide-fade-leave-active {
-  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
 }
 .slide-fade-enter {
   transform: translateY(-150px);

@@ -10,63 +10,62 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { mapActions } from 'vuex'
+import axios from "axios";
+import { mapActions } from "vuex";
 
-import toolBar from '../components/TheToolBarHome.vue'
+import toolBar from "../components/TheToolBarHome.vue";
 
 // const PATH_IMG = 'http://rest.jobhunter.rest/public/uploads/'
 
 export default {
-  name: 'categories-page',
+  name: "categories-page",
   components: {
-    'categories-all': () => import('./CategoriesAll.vue'),
-    'tool-bar': toolBar
+    "categories-all": () => import("./CategoriesAll.vue"),
+    "tool-bar": toolBar
   },
-  data () {
+  data() {
     return {
       loading: true,
       page: 1,
       data: []
-    }
+    };
   },
-  computed: {
-  },
-  created: function () {
+  computed: {},
+  created: function() {
     // console.log(this.avatar)
   },
-  mounted: function () {
-    this.fetchData()
+  mounted: function() {
+    this.fetchData();
   },
   methods: {
-    fetchData: function () {
+    fetchData: function() {
       axios
-        .get('/categories', {
+        .get("/categories", {
           params: {
             limit: 12,
             page: 1
           }
         })
         .then(response => {
-          this.data = response.data.data
+          this.data = response.data.data;
           // console.log(this.data)
-          this.loading = false
+          this.loading = false;
         })
         .catch(error => {
-          console.error(error)
-          this.newError(error)
-          this.loading = true
-        })
+          console.error(error);
+          this.newError(error);
+          this.loading = true;
+        });
     },
-    toMovement: function () {
+    toMovement: function() {
       this.$router.push({
-        path: '/view',
+        path: "/view",
         params: { id: this.movementId }
-      })
+      });
     },
-    ...mapActions('error', [ 'newError' ])
+    ...mapActions("error", ["newError"])
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

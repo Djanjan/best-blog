@@ -8,7 +8,10 @@
         :permanent="true"
         color="transparent"
         floating
-        v-if="((curectRouterName !== 'article')&&(curectRouterName !== 'comments')) || $vuetify.breakpoint.lgAndUp"
+        v-if="
+          (curectRouterName !== 'article' && curectRouterName !== 'comments') ||
+            $vuetify.breakpoint.lgAndUp
+        "
       >
         <v-list dense color="transparent">
           <v-list-item>
@@ -55,70 +58,69 @@
     </template>
 
     <app-error></app-error>
-
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 
-import AppError from './AppError.vue'
+import AppError from "./AppError.vue";
 
 export default {
-  name: 'the-navigation-panel',
+  name: "the-navigation-panel",
   components: {
-    'app-error': AppError
+    "app-error": AppError
   },
   data: () => ({
     loading: true,
     links: [
-      { text: 'Home', icon: 'mdi-home', name: 'home', path: '/app/home' },
+      { text: "Home", icon: "mdi-home", name: "home", path: "/app/home" },
       {
-        text: 'Category',
-        icon: 'mdi-shape',
-        name: 'categories',
-        path: '/app/categories'
+        text: "Professions",
+        icon: "mdi-shape",
+        name: "professions",
+        path: "/app/professions"
       },
       {
-        text: 'Search',
-        icon: 'mdi-magnify',
-        name: 'search',
-        path: '/app/search'
+        text: "Search",
+        icon: "mdi-magnify",
+        name: "search",
+        path: "/app/search"
       }
     ]
   }),
   computed: {
-    ...mapState('router', {
+    ...mapState("router", {
       curectRouterName: state => state.name
     }),
     selectedItems: {
-      get () {
-        return this.value
+      get() {
+        return this.value;
       },
-      set (item) {
+      set(item) {
         if (
           item !== undefined &&
           this.$router.currentRoute.name !== this.links[item].name
         ) {
-          this.$router.push(this.links[item].path)
+          this.$router.push(this.links[item].path);
         }
       }
     }
   },
-  created: function () {
+  created: function() {
     // console.log(this.$store.state.appBar.drawer)
   },
-  mounted: function () {
+  mounted: function() {
     // eslint-disable-next-line no-return-assign
-    setTimeout(() => (this.loading = false), 500)
+    setTimeout(() => (this.loading = false), 500);
     // this.loading = false
   },
   methods: {
-    randomNumber: function (value) {
-      return Math.floor(Math.random() * (value - 1 + 1)) + 1
+    randomNumber: function(value) {
+      return Math.floor(Math.random() * (value - 1 + 1)) + 1;
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss"></style>

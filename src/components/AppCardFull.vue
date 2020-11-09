@@ -1,53 +1,51 @@
 <template>
-    <v-hover
-      v-slot:default="{ hover }">
+  <v-hover v-slot:default="{ hover }">
     <v-card
       :class="customClass + (isHoverAndRipple ? 'a-link' : '')"
       :elevation="applyHover(hover)"
-      :ripple="applyRipple()">
+      :ripple="applyRipple()"
+    >
+      <slot name="img"></slot>
 
-    <slot name="img"></slot>
-
-    <div
-      class="d-flex justify-center"
-      :style="'height:'+circleSize/2 +'px;'">
-      <v-avatar
-        :color="$vuetify.theme.dark ? '#424242':'white'"
-        :size="circleSize+12"
-        :style="'top:' + -((circleSize/2)+4) + 'px ;'">
+      <div
+        class="d-flex justify-center"
+        :style="'height:' + circleSize / 2 + 'px;'"
+      >
         <v-avatar
-          :color="circleColor"
-          :size="circleSize">
-          <v-icon
-            v-if="!isAvatar"
-            color="white"
-            :size="circleSize/2"
-          >
-            {{icon}}
-          </v-icon>
+          :color="$vuetify.theme.dark ? '#1E1E1E' : 'white'"
+          :size="circleSize + 12"
+          :style="'top:' + -(circleSize / 2 + 4) + 'px ;'"
+        >
+          <v-avatar :color="circleColor" :size="circleSize">
+            <v-icon v-if="!isAvatar" color="white" :size="circleSize / 2">
+              {{ icon }}
+            </v-icon>
 
-          <img v-else :lazy-src="`https://picsum.photos/10/6?image=${3}`" :src="avatar"/>
+            <img
+              v-else
+              :lazy-src="`https://picsum.photos/10/6?image=${3}`"
+              :src="avatar"
+            />
+          </v-avatar>
         </v-avatar>
-      </v-avatar>
-    </div>
+      </div>
 
-    <slot></slot>
-
+      <slot></slot>
     </v-card>
-    </v-hover>
+  </v-hover>
 </template>
 
 <script>
 export default {
-  name: 'app-card-full',
+  name: "app-card-full",
   props: {
     customClass: {
       type: String,
-      default: ''
+      default: ""
     },
     circleColor: {
       type: String,
-      default: 'secondary'
+      default: "secondary"
     },
     circleSize: {
       type: Number,
@@ -59,43 +57,39 @@ export default {
     },
     icon: {
       type: String,
-      default: ''
+      default: ""
     },
     avatar: {
       type: String,
-      default: ''
+      default: ""
     },
     isHoverAndRipple: {
       type: Boolean,
       default: false
     }
   },
-  data: () => ({
-
-  }),
-  computed: {
-
-  },
-  created: function () {
+  data: () => ({}),
+  computed: {},
+  created: function() {
     // console.log(this.avatar)
   },
   methods: {
-    applyHover: function (hover) {
+    applyHover: function(hover) {
       if (this.isHoverAndRipple) {
-        return hover ? 20 : 2
+        return hover ? 20 : 2;
       } else {
-        return ''
+        return "";
       }
     },
-    applyRipple: function () {
+    applyRipple: function() {
       if (this.isHoverAndRipple) {
-        return { class: 'primary--text' }
+        return { class: "primary--text" };
       } else {
-        return false
+        return false;
       }
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

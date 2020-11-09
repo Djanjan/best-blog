@@ -36,57 +36,56 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { mapActions } from 'vuex'
+import axios from "axios";
+import { mapActions } from "vuex";
 
-import pagination from '../mixins/pagination.js'
+import pagination from "../mixins/pagination.js";
 
-import AppLayout from '../components/AppLayout.vue'
+import AppLayout from "../components/AppLayout.vue";
 
 export default {
-  name: 'categories-all-page',
+  name: "categories-all-page",
   mixins: [pagination],
   components: {
-    'app-layout': AppLayout,
-    'category-card': () => import('../components/CategoryCard.vue')
+    "app-layout": AppLayout,
+    "category-card": () => import("../components/CategoryCard.vue")
   },
-  data () {
+  data() {
     return {
       loading: true,
       data: []
-    }
+    };
   },
-  computed: {
-  },
-  created: function () {
+  computed: {},
+  created: function() {
     // console.log(this.avatar)
   },
-  mounted: function () {
-    this.fetchData(this.page)
+  mounted: function() {
+    this.fetchData(this.page);
   },
   methods: {
-    fetchData: function (page) {
-      this.loading = true
+    fetchData: function(page) {
+      this.loading = true;
       axios
-        .get('/categories', {
+        .get("/categories", {
           params: {
             limit: this.limitPage,
             page: page
           }
         })
         .then(response => {
-          this.data = response.data.data.data
-          this.maxPage = response.data.data.last_page
+          this.data = response.data.data.data;
+          this.maxPage = response.data.data.last_page;
           // console.log(response.data.data)
-          this.loading = false
+          this.loading = false;
         })
         .catch(error => {
-          console.error(error)
-          this.newError(error)
-          this.loading = true
-        })
+          console.error(error);
+          this.newError(error);
+          this.loading = true;
+        });
     },
-    ...mapActions('error', [ 'newError' ])
+    ...mapActions("error", ["newError"])
     /* toMovement: function () {
       this.$router.push({
         path: '/view',
@@ -94,5 +93,5 @@ export default {
       })
     }, */
   }
-}
+};
 </script>

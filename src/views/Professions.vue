@@ -10,31 +10,29 @@
 </template>
 
 <script>
-import toolBar from '../components/TheToolBarHome.vue'
+import toolBar from "../components/TheToolBarHome.vue";
 
 export default {
-  name: 'professions-page',
+  name: "professions-page",
   components: {
-    'professions-all': () => import('./ProfessionsAll.vue'),
-    'tool-bar': toolBar
+    "professions-all": () => import("./ProfessionsAll.vue"),
+    "tool-bar": toolBar
   },
   data: () => ({
-    error: ''
+    error: ""
   }),
-  computed: {
-  },
-  created: function () {
+  computed: {},
+  created: function() {
     // console.log(this.avatar)
   },
-  mounted: function () {
-  },
+  mounted: function() {},
   methods: {
-    toMovement: function () {
+    toMovement: function() {
       this.$router.push({
-        path: '/view',
+        path: "/view",
         params: { id: this.movementId }
-      })
+      });
     }
   }
-}
+};
 </script>

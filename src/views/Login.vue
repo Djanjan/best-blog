@@ -1,7 +1,14 @@
 <template>
   <div>
     <template v-if="!$vuetify.breakpoint.xs">
-      <v-toolbar flat color="transparent" absolute dark height="80px" width="100%">
+      <v-toolbar
+        flat
+        color="transparent"
+        absolute
+        dark
+        height="80px"
+        width="100%"
+      >
         <v-btn icon @click="closePage()" class="ml-1">
           <v-icon>mdi-close</v-icon>
         </v-btn>
@@ -122,7 +129,8 @@
 
         <v-toolbar-items class="mr-1">
           <v-btn icon text @click="openRegsterPage()"
-            ><v-icon>mdi-account-multiple-plus</v-icon></v-btn>
+            ><v-icon>mdi-account-multiple-plus</v-icon></v-btn
+          >
         </v-toolbar-items>
       </v-toolbar>
       <v-card class="px-5 pb-3" min-width="100%">
@@ -193,75 +201,75 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-import { validationMixin } from 'vuelidate'
-import { required, maxLength, email } from 'vuelidate/lib/validators'
-import axios from 'axios'
+import { mapActions } from "vuex";
+import { validationMixin } from "vuelidate";
+import { required, maxLength, email } from "vuelidate/lib/validators";
+import axios from "axios";
 
 // import hfooter from '../components/Footer.vue'
 
 export default {
-  name: 'loginDialog',
+  name: "loginDialog",
   mixins: [validationMixin],
   validations: {
     name: { required, maxLength: maxLength(25) },
     email: { required, email },
     password: { required },
-    submitStatus: ''
+    submitStatus: ""
   },
   components: {
     // hfooter
   },
   data: () => ({
     loading: true,
-    name: '',
-    email: '',
-    password: ''
+    name: "",
+    email: "",
+    password: ""
   }),
   computed: {
-    passwordErrors () {
-      const errors = []
-      if (!this.$v.password.$dirty) return errors
-      !this.$v.password.required && errors.push('Password is required')
-      return errors
+    passwordErrors() {
+      const errors = [];
+      if (!this.$v.password.$dirty) return errors;
+      !this.$v.password.required && errors.push("Password is required");
+      return errors;
     },
-    nameErrors () {
-      const errors = []
-      if (!this.$v.name.$dirty) return errors
+    nameErrors() {
+      const errors = [];
+      if (!this.$v.name.$dirty) return errors;
       !this.$v.name.maxLength &&
-        errors.push('Name must be at most 25 characters long')
-      !this.$v.name.required && errors.push('Name is required.')
-      return errors
+        errors.push("Name must be at most 25 characters long");
+      !this.$v.name.required && errors.push("Name is required.");
+      return errors;
     },
-    emailErrors () {
-      const errors = []
-      if (!this.$v.email.$dirty) return errors
-      !this.$v.email.email && errors.push('Must be valid e-mail')
-      !this.$v.email.required && errors.push('E-mail is required')
-      return errors
+    emailErrors() {
+      const errors = [];
+      if (!this.$v.email.$dirty) return errors;
+      !this.$v.email.email && errors.push("Must be valid e-mail");
+      !this.$v.email.required && errors.push("E-mail is required");
+      return errors;
     }
   },
-  mounted: function () {
+  mounted: function() {
     // eslint-disable-next-line no-return-assign
-    setTimeout(() => (this.loading = false), 500)
+    setTimeout(() => (this.loading = false), 500);
     // this.loading = false
   },
   methods: {
-    ...mapActions('user', ['authorization']),
-    randomNumber: function (value) {
-      return Math.floor(Math.random() * (value - 1 + 1)) + 1
+    ...mapActions("user", ["authorization"]),
+    randomNumber: function(value) {
+      return Math.floor(Math.random() * (value - 1 + 1)) + 1;
     },
-    openRegsterPage () {
-      this.$router.push({ path: '/register' })
+    openRegsterPage() {
+      this.$router.push({ path: "/register" });
     },
-    submit () {
-      this.$v.$touch()
+    submit() {
+      this.$v.$touch();
       if (this.$v.$invalid) {
-        this.submitStatus = 'ERROR'
+        this.submitStatus = "ERROR";
       } else {
-        this.submitStatus = 'PENDING'
+        this.submitStatus = "PENDING";
 
-        this.fetchData()
+        this.fetchData();
         /* setTimeout(() => {
           this.authorization({
             login: this.name,
@@ -276,46 +284,46 @@ export default {
         }, 500) */
       }
     },
-    clear () {
-      this.$v.$reset()
-      this.name = ''
-      this.email = ''
-      this.password = ''
+    clear() {
+      this.$v.$reset();
+      this.name = "";
+      this.email = "";
+      this.password = "";
     },
-    fetchData: function () {
-      this.loading = true
+    fetchData: function() {
+      this.loading = true;
       axios
-        .post('/login', {
+        .post("/login", {
           email: this.email,
           password: this.password
         })
         .then(response => {
-          this.data = response.data.data
-          console.log(response.data.data)
+          this.data = response.data.data;
+          //console.log(response.data.data);
           this.authorization({
             id: this.data.id,
             login: this.data.name,
             email: this.data.email,
             avatar: this.data.featured_img,
             token: this.data.token
-          })
-          this.submitStatus = 'OK'
-          this.closePage()
-          this.loading = false
+          });
+          this.submitStatus = "OK";
+          this.closePage();
+          this.loading = false;
         })
         .catch(error => {
-          console.error(error)
-          this.newError(error)
-          this.loading = true
-        })
+          console.error(error);
+          this.newError(error);
+          this.loading = true;
+        });
     },
-    closePage () {
+    closePage() {
       this.$router.push({
-        name: 'home'
-      })
+        name: "home"
+      });
     }
   }
-}
+};
 </script>
 
 <style lang="scss">

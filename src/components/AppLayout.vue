@@ -2,11 +2,16 @@
   <div :class="customClass">
     <v-row align="center">
       <v-col>
-        <h2 class="font-weight-medium">{{title}}</h2>
+        <h2 class="font-weight-medium">{{ title }}</h2>
       </v-col>
 
       <v-col v-if="movementId !== ''">
-        <h4 class="text-right font-weight-medium a-link" @click.stop="toMovement()">see all</h4>
+        <h4
+          class="text-right font-weight-medium a-link"
+          @click.stop="toMovement()"
+        >
+          see all
+        </h4>
       </v-col>
     </v-row>
 
@@ -18,38 +23,35 @@
 
 <script>
 export default {
-  name: 'app-layout',
+  name: "app-layout",
   props: {
     customClass: {
       type: String,
-      default: ''
+      default: ""
     },
     title: {
       type: String,
-      default: ''
+      default: ""
     },
     movementId: {
       type: String,
-      default: ''
+      default: ""
     }
   },
-  data: () => ({
-  }),
-  computed: {
-
-  },
-  created: function () {
+  data: () => ({}),
+  computed: {},
+  created: function() {
     // console.log(this.avatar)
   },
   methods: {
-    toMovement: function () {
+    toMovement: function() {
       this.$router.push({
-        path: '/view',
+        path: "/view",
         params: { movementId: this.movementId }
-      })
+      });
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

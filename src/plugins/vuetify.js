@@ -1,10 +1,10 @@
-import Vue from 'vue'
-import Vuetify from 'vuetify/lib'
+import Vue from "vue";
+import Vuetify from "vuetify/lib";
 
-import light from './vuetify/light.js'
-import dark from './vuetify/dark.js'
+import light from "./vuetify/light.js";
+import dark from "./vuetify/dark.js";
 
-Vue.use(Vuetify)
+Vue.use(Vuetify);
 
 export default new Vuetify({
   theme: {
@@ -13,7 +13,7 @@ export default new Vuetify({
       customProperties: true
     }
   }
-})
+});
 
 /* export default new Vuetify({
   theme: {

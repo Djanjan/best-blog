@@ -111,7 +111,6 @@
             </v-col>
           </v-row>
         </v-skeleton-loader>
-
       </v-card>
     </v-card-text>
 
@@ -240,107 +239,102 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState } from "vuex";
 
 export default {
   data: () => ({
     loading: true,
     settings: [],
     colors: [
-      { cod: '#F44336', name: 'red' },
-      { cod: '#E91E63', name: 'pink' },
-      { cod: '#9C27B0', name: 'purple' },
-      { cod: '#673AB7', name: 'deep-purple' },
-      { cod: '#3F51B5', name: 'indigo' },
-      { cod: '#2196F3', name: 'blue' },
-      { cod: '#00BCD4', name: 'cyan' },
-      { cod: '#4CAF50', name: 'green' },
-      { cod: '#8BC34A', name: 'light-green' },
-      { cod: '#CDDC39', name: 'lime' },
-      { cod: '#FF5722', name: 'deep-orange' }
+      { cod: "#F44336", name: "red" },
+      { cod: "#E91E63", name: "pink" },
+      { cod: "#9C27B0", name: "purple" },
+      { cod: "#673AB7", name: "deep-purple" },
+      { cod: "#3F51B5", name: "indigo" },
+      { cod: "#2196F3", name: "blue" },
+      { cod: "#00BCD4", name: "cyan" },
+      { cod: "#4CAF50", name: "green" },
+      { cod: "#8BC34A", name: "light-green" },
+      { cod: "#CDDC39", name: "lime" },
+      { cod: "#FF5722", name: "deep-orange" }
     ],
     colorsD: [
-      { cod: '#F44336', name: 'red' },
-      { cod: '#E91E63', name: 'pink' },
-      { cod: '#9C27B0', name: 'purple' },
-      { cod: '#673AB7', name: 'deep-purple' },
-      { cod: '#3F51B5', name: 'indigo' },
-      { cod: '#2196F3', name: 'blue' },
-      { cod: '#00BCD4', name: 'cyan' },
-      { cod: '#4CAF50', name: 'green' },
-      { cod: '#8BC34A', name: 'light-green' },
-      { cod: '#CDDC39', name: 'lime' },
-      { cod: '#FF5722', name: 'deep-orange' },
-      { cod: undefined, name: 'default' }
+      { cod: "#F44336", name: "red" },
+      { cod: "#E91E63", name: "pink" },
+      { cod: "#9C27B0", name: "purple" },
+      { cod: "#673AB7", name: "deep-purple" },
+      { cod: "#3F51B5", name: "indigo" },
+      { cod: "#2196F3", name: "blue" },
+      { cod: "#00BCD4", name: "cyan" },
+      { cod: "#4CAF50", name: "green" },
+      { cod: "#8BC34A", name: "light-green" },
+      { cod: "#CDDC39", name: "lime" },
+      { cod: "#FF5722", name: "deep-orange" },
+      { cod: undefined, name: "default" }
     ],
     images: [
-      { src: 'https://cdn.vuetifyjs.com/images/backgrounds/bg.jpg' },
-      { src: 'https://cdn.vuetifyjs.com/images/backgrounds/md.jpg' },
-      { src: 'https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg' },
-      { src: 'https://cdn.vuetifyjs.com/images/backgrounds/md2.jpg' }
+      { src: "https://cdn.vuetifyjs.com/images/backgrounds/bg.jpg" },
+      { src: "https://cdn.vuetifyjs.com/images/backgrounds/md.jpg" },
+      { src: "https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg" },
+      { src: "https://cdn.vuetifyjs.com/images/backgrounds/md2.jpg" }
     ]
   }),
   computed: {
-    ...mapState('theme', {
+    ...mapState("theme", {
       appBarProp: state => state.appBar
     }),
     selectedColorPrimary: {
-      get () {
-        return this.value
+      get() {
+        return this.value;
       },
-      set (item) {
+      set(item) {
         if (item !== undefined) {
-          this.$vuetify.theme.themes.light.primary = this.colors[item].cod
-          this.$vuetify.theme.themes.dark.primary = this.colors[item].cod
+          this.$vuetify.theme.themes.light.primary = this.colors[item].cod;
+          this.$vuetify.theme.themes.dark.primary = this.colors[item].cod;
         }
       }
     },
     selectedColorSecondary: {
-      get () {
-        return this.value
+      get() {
+        return this.value;
       },
-      set (item) {
+      set(item) {
         if (item !== undefined) {
-          this.$vuetify.theme.themes.light.secondary = this.colors[item].cod
-          this.$vuetify.theme.themes.dark.secondary = this.colors[item].cod
+          this.$vuetify.theme.themes.light.secondary = this.colors[item].cod;
+          this.$vuetify.theme.themes.dark.secondary = this.colors[item].cod;
         }
       }
     },
     selectedColorTertiary: {
-      get () {
-        return this.value
+      get() {
+        return this.value;
       },
-      set (item) {
+      set(item) {
         if (item !== undefined) {
-          this.$vuetify.theme.themes.light.tertiary = this.colors[item].cod
-          this.$vuetify.theme.themes.dark.tertiary = this.colors[item].cod
+          this.$vuetify.theme.themes.light.tertiary = this.colors[item].cod;
+          this.$vuetify.theme.themes.dark.tertiary = this.colors[item].cod;
         }
       }
     },
     selectedMode: {
-      get () {
-        return this.$vuetify.theme.dark
+      get() {
+        return this.$vuetify.theme.dark;
       },
-      set (item) {
+      set(item) {
         if (item !== undefined) {
-          this.$vuetify.theme.dark = item
+          this.$vuetify.theme.dark = item;
         }
       }
     }
   },
-  created: function () {
-
-  },
-  mounted: function () {
+  created: function() {},
+  mounted: function() {
     // eslint-disable-next-line no-return-assign
-    setTimeout(() => (this.loading = false), 500)
+    setTimeout(() => (this.loading = false), 500);
     // this.loading = false
   },
   methods: {
-    ...mapActions('theme', [
-      'setNavigationDrawer',
-      'setAppBar'
-    ])
+    ...mapActions("theme", ["setNavigationDrawer", "setAppBar"])
   }
-}
+};
 </script>

@@ -1,8 +1,8 @@
 <template>
-<div class="ma-5">
-  <!--<div v-html="compiledHtml"></div>-->
-   <div v-html="html"></div>
-</div>
+  <div class="ml-5 mr-5 mt-5 pb-5">
+    <!--<div v-html="compiledHtml"></div>-->
+    <div v-html="html"></div>
+  </div>
 </template>
 
 <script>
@@ -41,15 +41,15 @@ Deleted branch hotfix-1.2.1 (was abbe5d6).
     }
   },
   data: () => ({
-    file: 'index1.html',
-    inputfile: ''
+    file: "index1.html",
+    inputfile: ""
   }),
   computed: {
-    compiledHtml: function () {
-      return this.inputfile
+    compiledHtml: function() {
+      return this.inputfile;
     }
   },
-  created: function () {
+  created: function() {
     // this.loadFile()
   },
   methods: {
@@ -67,7 +67,7 @@ Deleted branch hotfix-1.2.1 (was abbe5d6).
         })
     } */
   }
-}
+};
 </script>
 
 <style lang="scss">

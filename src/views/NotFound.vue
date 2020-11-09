@@ -8,9 +8,17 @@
     >
       <v-layout align-center justify-center style="height:100%;">
         <v-row align="center" justify="center">
-          <v-col cols="12" md="8" align="center" justify="center" class="white--text">
+          <v-col
+            cols="12"
+            md="8"
+            align="center"
+            justify="center"
+            class="white--text"
+          >
             <div>
-              <div class="display-3 font-weight-bold text-center">Ohhh god what is it!</div>
+              <div class="display-3 font-weight-bold text-center">
+                Ohhh god what is it!
+              </div>
               <div class="subtitle-1 text-center mt-5">You are lost...</div>
               <v-btn
                 class="mt-3"
@@ -30,22 +38,21 @@
 </template>
 
 <script>
-
 export default {
   data: () => ({
     loading: true
   }),
-  mounted: function () {
+  mounted: function() {
     // eslint-disable-next-line no-return-assign
-    setTimeout(() => (this.loading = false), 500)
+    setTimeout(() => (this.loading = false), 500);
     // this.loading = false
   },
   methods: {
-    randomNumber: function () {
-      return Math.floor(Math.random() * (100 - 1 + 1)) + 1 // 63, 40
+    randomNumber: function() {
+      return Math.floor(Math.random() * (100 - 1 + 1)) + 1; // 63, 40
     }
   }
-}
+};
 </script>
 
 <style lang="scss">

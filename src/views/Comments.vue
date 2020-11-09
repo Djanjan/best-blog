@@ -57,24 +57,24 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { mapState, mapActions } from 'vuex'
+import axios from "axios";
+import { mapState, mapActions } from "vuex";
 
 export default {
-  name: 'comments-page',
+  name: "comments-page",
   props: {
     id: {
       type: String,
-      default: ''
+      default: ""
     },
     customClass: {
       type: String,
-      default: ''
+      default: ""
     }
   },
   components: {
-    'comment-card': () => import('../components/CommentCard.vue'),
-    'tool-bar': () => import('../components/CommentsToolBar.vue')
+    "comment-card": () => import("../components/CommentCard.vue"),
+    "tool-bar": () => import("../components/CommentsToolBar.vue")
   },
   data: () => ({
     comments: [],
@@ -85,60 +85,60 @@ export default {
     data: {}
   }),
   computed: {
-    ...mapState('router', {
+    ...mapState("router", {
       curectRouterName: state => state.name
     }),
     selectedPage: {
-      get () {
-        return this.page
+      get() {
+        return this.page;
       },
-      set (item) {
+      set(item) {
         if (item !== this.page) {
-          this.page = item
-          this.fetchData(item)
+          this.page = item;
+          this.fetchData(item);
         }
       }
     },
-    limitPage: function () {
-      return this.curectRouterName === 'comments' ? 12 : this.limitMinPage
+    limitPage: function() {
+      return this.curectRouterName === "comments" ? 12 : this.limitMinPage;
     }
   },
-  created: function () {
+  created: function() {
     // console.log(this.avatar)
     // this.fetchData()
   },
-  mounted: function () {
-    this.fetchData(this.page)
+  mounted: function() {
+    this.fetchData(this.page);
   },
   methods: {
-    ...mapActions('error', ['newError']),
-    openCommentsPage: function () {
+    ...mapActions("error", ["newError"]),
+    openCommentsPage: function() {
       this.$router.push({
-        name: 'comments',
+        name: "comments",
         params: { id: this.id }
-      })
+      });
     },
-    fetchData: function (page) {
-      this.loading = true
+    fetchData: function(page) {
+      this.loading = true;
       axios
-        .get('comments/post/' + this.id, {
+        .get("comments/article/" + this.id, {
           params: {
             limit: this.limitPage,
             page: page
           }
         })
         .then(response => {
-          this.data = response.data.data.data
-          this.maxPage = response.data.data.last_page
+          this.data = response.data.results;
+          this.maxPage = response.data.info.maxPage;
           // console.log(this.data)
-          this.loading = false
+          this.loading = false;
         })
         .catch(error => {
-          console.error(error)
-          this.newError(error)
-          this.loading = true
-        })
+          console.error(error);
+          this.newError(error);
+          this.loading = true;
+        });
     }
   }
-}
+};
 </script>

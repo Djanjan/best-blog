@@ -1,27 +1,34 @@
 <template>
-<div>
+  <div>
     <template v-if="!isIconMdi">
       <v-avatar tile :size="size">
-        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-          :width="size" :height="size"
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          x="0px"
+          y="0px"
+          :width="size"
+          :height="size"
           viewBox="0 0 24 24"
-          :style="'fill:'+color+';'">  <path :d="icon"></path></svg>
+          :style="'fill:' + color + ';'"
+        >
+          <path :d="icon"></path>
+        </svg>
       </v-avatar>
     </template>
 
     <template v-else>
-      <v-icon>{{icon}}</v-icon>
+      <v-icon>{{ icon }}</v-icon>
     </template>
-</div>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'app-icon',
+  name: "app-icon",
   props: {
     customClass: {
       type: String,
-      default: ''
+      default: ""
     },
     size: {
       type: Number,
@@ -33,16 +40,14 @@ export default {
     },
     color: {
       type: String,
-      default: 'rgba(0, 0, 0, 0.54)'
+      default: "rgba(0, 0, 0, 0.54)"
     }
   },
-  data: () => ({
-
-  }),
+  data: () => ({}),
   computed: {
-    isIconMdi: function () {
-      return this.icon.indexOf('mdi') === 0
+    isIconMdi: function() {
+      return this.icon.indexOf("mdi") === 0;
     }
   }
-}
+};
 </script>

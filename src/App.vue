@@ -7,38 +7,34 @@
 </template>
 
 <script>
-
 export default {
   props: {
     source: String
   },
-  components: {
-  },
-  data: () => ({
-  }),
-  created: function () {
+  components: {},
+  data: () => ({}),
+  created: function() {
     // this.$router.push({ path: '/home' })
   },
-  computed: {
-  },
+  computed: {},
   methods: {}
-}
+};
 </script>
 
 <style scoped>
-.background-lighten {
+/*.background-lighten {
   background-image: linear-gradient(
     to bottom,
     var(--v-primary-base) 0%,
     var(--v-tertiary-base) 100%
   );
-}
+}*/
 
 .slide-fade-enter-active {
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 .slide-fade-leave-active {
-  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
 }
 .slide-fade-enter {
   opacity: 0;
